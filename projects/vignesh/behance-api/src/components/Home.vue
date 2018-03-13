@@ -1,17 +1,17 @@
 <template>
   <!-- <div class="home" v-scroll="scrollHigh"> -->
   <div class="home">
-    <parallax  style='z-index:-999;' :fixed='true'>
-      <div class='welcome-page' >
+    <parallax style='z-index:-999;' :fixed='true'>
+      <div class='welcome-page'>
         <div class='welcome-page-details'>
           <h1>Showcasing our designer's work</h1>
           <button v-scroll-to="'.designers-section'">View our designers</button>
         </div>
-        <div v-if='image1' class='welcome-img'>
-          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='coverImages[0]'>
+        <div v-for="(authorProject,index) in authorProjects" v-if='image1' class='welcome-img'>
+          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='authorProject.author1Projects[5].covers[404]'>
         </div>
-        <div v-if='image2' class='welcome-img'>
-          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='coverImages[1]'>
+        <div v-for="(authorProject,index) in authorProjects" v-if='image2' class='welcome-img'>
+          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='authorProject.author1Projects[7].covers[404]'>
         </div>
       </div>
     </parallax>
@@ -22,15 +22,21 @@
         <div class='designers'>
           <div v-for="(designer,index) in designers" :class="{highlight:designer.field == selected}" id='profileimg' @click="selected = designer.field">
             <img v-bind:src='designer.profile'>
-            <div class='hoverclick'><p >Click to see details</p></div>
+            <div class='hoverclick'>
+              <p>Click to see details</p>
+            </div>
             <h2>{{designer.name}}</h2>
             <p>{{designer.field}}</p>
             <div :class="{arrowdown:designer.field == selected}"></div>
           </div>
-
-          <div v-for="stat in stats">
-            <p>{{stat.followers}}</p>
-          </div>
+        </div>
+        <div v-if='author1Stats' v-for="(authorProject,index) in authorProjects">
+          <h1>Total contribution - {{authorProject.author1Projects.length}}</h1>
+        </div>
+        <div v-if='author1Stats' v-for="stat in stats">
+          <p>{{stat.author1Stat.followers}}</p>
+          <p>{{stat.author1Stat.views}}</p>
+          <p>{{stat.author1Stat.appreciations}}</p>
         </div>
       </div>
       <Projects @sendCoverimage='addCoverimage'></Projects>
@@ -47,17 +53,18 @@ export default {
   data() {
     return {
       designers: [],
-      coverImages: [],
+      authorProjects: [],
       fields: [],
       clicked: false,
       scrollPosition: null,
       position: null,
       names: [],
       selected: '',
+      profilehover: false,
       image1: true,
       image2: false,
-      profilehover:false,
-      stats:[]
+      stats: [],
+      author1Stats: false
     }
   },
   components: {
@@ -66,23 +73,32 @@ export default {
   },
   methods: {
     addCoverimage: function(data) {
-      this.coverImages = data
-
+      this.authorProjects = data
       // console.log(this.image)
+
     },
     toggle: function(clicked) {
       clicked = !clicked
+
     },
     scrollHigh: function() {
       this.scrollPosition = window.scrollY
       this.position = window.innerHeight
+
     },
-    mouseOver: function(){
-      this.profilehover = ! this.profilehover
+
+    mouseOver: function() {
+      this.profilehover = !this.profilehover
+
     }
   },
   mounted() {
     window.addEventListener('scroll', this.scrollHigh)
+  },
+  updated() {
+    if (this.selected === 'photography') {
+      this.author1Stats = true
+    }
   },
   created() {
     var self = this
@@ -95,44 +111,44 @@ export default {
 
     this.$http.jsonp('https://api.behance.net/v2/users?q=Sarel van Staden&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
       .then(response => {
-        this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name)})
-        // console.log(this.designers)
-        this.stats.push(response.body.users[0].stats)
-      }).catch(e => {
-        console.log(e);
-      }
-      ),
-
-      this.$http.jsonp('https://api.behance.net/v2/users?q=Nathan Chambers&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
-        .then(response => {
-          // this.designers = response
-          // console.log(response.body.users[0].images[276])
-          console.log(response)
-          this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
-        }).catch(e => {
-          console.log(e);
-        }
-        )
-    this.$http.jsonp('https://api.behance.net/v2/users?q=Elena Galitsky&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
-      .then(response => {
-        // this.designers = response
-        // console.log(response.body.users[0].images[276])
-        console.log(response)
         this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
+        // console.log(this.designers)
+        this.stats.push({ author1Stat: response.body.users[0].stats })
       }).catch(e => {
         console.log(e);
       }
-      ),
-      this.$http.jsonp('https://api.behance.net/v2/users?q=Danny Carlsen&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
-        .then(response => {
-          // this.designers = response
-          // console.log(response.body.users[0].images[276])
-          console.log(response)
-          this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[1], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
-        }).catch(e => {
-          console.log(e);
-        }
-        )
+      )
+
+      // this.$http.jsonp('https://api.behance.net/v2/users?q=Nathan Chambers&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
+      //   .then(response => {
+      //     // this.designers = response
+      //     // console.log(response.body.users[0].images[276])
+      //     console.log(response)
+      //     this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
+      //   }).catch(e => {
+      //     console.log(e);
+      //   }
+      //   )
+    // this.$http.jsonp('https://api.behance.net/v2/users?q=Elena Galitsky&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
+    //   .then(response => {
+    //     // this.designers = response
+    //     // console.log(response.body.users[0].images[276])
+    //     console.log(response)
+    //     this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
+    //   }).catch(e => {
+    //     console.log(e);
+    //   }
+    //   ),
+    //   this.$http.jsonp('https://api.behance.net/v2/users?q=Danny Carlsen&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
+    //     .then(response => {
+    //       // this.designers = response
+    //       // console.log(response.body.users[0].images[276])
+    //       console.log(response)
+    //       this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[1], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
+    //     }).catch(e => {
+    //       console.log(e);
+    //     }
+    //     )
   }
 }
 </script>
@@ -152,25 +168,29 @@ export default {
 
 .para {
   width: 100%;
-  height:100%;
-  position: absolute;top:0;
-  left:0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: -999;
 }
-.paraeffect{
-  background-color: rgba(0,0,0,0.7);
+
+.paraeffect {
+  background-color: rgba(0, 0, 0, 0.7);
   transition: background-color 0.2s ease-in;
-  z-index:1;
+  z-index: 1;
 }
+
 .home1 {
   background-color: white;
 }
-.hoverclick{
+
+.hoverclick {
   position: absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  right:0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
   visibility: hidden;
 }
 
@@ -230,18 +250,19 @@ export default {
 .designers-section {
   width: 100%;
   height: auto;
-  padding-top:2em;
+  padding-top: 2em;
 }
 
 .designers {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  margin-top:2em;
+  margin-top: 2em;
 }
-#profileimg{
+
+#profileimg {
   position: relative;
- }
+}
 
 
 
