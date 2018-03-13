@@ -22,7 +22,7 @@
       </div>
       
     </div>
-    
+    <!--<iframe width='1200px' height='500px' src='./vigneshHome'></iframe>-->
   </div>
 </template>
 
