@@ -7,11 +7,11 @@
           <h1>Showcasing our designer's work</h1>
           <button v-scroll-to="'.designers-section'">View our designers</button>
         </div>
-        <div v-for="(authorProject,index) in authorProjects" v-if='image1' class='welcome-img'>
-          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='authorProject.author1Projects[5].covers[404]'>
+        <div v-for="(sarelVanProject,index) in sarelVanProjects" v-if='image1' class='welcome-img'>
+          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='sarelVanProject[5].covers[404]'>
         </div>
-        <div v-for="(authorProject,index) in authorProjects" v-if='image2' class='welcome-img'>
-          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='authorProject.author1Projects[7].covers[404]'>
+        <div v-for="(sarelVanProject,index) in sarelVanProjects" v-if='image2' class='welcome-img'>
+          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='sarelVanProject[7].covers[404]'>
         </div>
       </div>
     </parallax>
@@ -27,19 +27,19 @@
             </div>
             <h2>{{designer.name}}</h2>
             <p>{{designer.field}}</p>
+             <p>{{designer.stats.followers}}</p>
+          <p>{{designer.stats.views}}</p>
+          <p>{{designer.stats.appreciations}}</p>
             <div :class="{arrowdown:designer.field == selected}"></div>
           </div>
         </div>
-        <div v-if='author1Stats' v-for="(authorProject,index) in authorProjects">
-          <h1>Total contribution - {{authorProject.author1Projects.length}}</h1>
-        </div>
-        <div v-if='author1Stats' v-for="stat in stats">
-          <p>{{stat.author1Stat.followers}}</p>
-          <p>{{stat.author1Stat.views}}</p>
-          <p>{{stat.author1Stat.appreciations}}</p>
-        </div>
+        
+     
       </div>
-      <Projects @sendCoverimage='addCoverimage'></Projects>
+      <NathanChambers v-if='author2Stats'></NathanChambers>
+      <SarelVanStaden v-if='author1Stats' @sendCoverimage='addCoverimage'></SarelVanStaden>
+      <ElenaGalitsky v-if='author4Stats'></ElenaGalitsky>
+      <DannyCarlsen v-if='author3Stats'></DannyCarlsen>
     </div>
   </div>
   <!--API=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c-->
@@ -47,13 +47,16 @@
 
 <script>
 import Parallax from './Parallax'
-import Projects from './Projects'
+import SarelVanStaden from './SarelvanStaden'
+import NathanChambers from './Nathan Chambers'
+import ElenaGalitsky from './Elena Galitsky'
+import DannyCarlsen from './Danny Carlsen'
 export default {
   name: 'vigneshhome',
   data() {
     return {
       designers: [],
-      authorProjects: [],
+      sarelVanProjects: [],
       fields: [],
       clicked: false,
       scrollPosition: null,
@@ -63,17 +66,22 @@ export default {
       profilehover: false,
       image1: true,
       image2: false,
-      stats: [],
-      author1Stats: false
+      author1Stats: false,
+      author2Stats: false,
+      author3Stats: true,
+      author4Stats: true
     }
   },
   components: {
-    Projects,
+    SarelVanStaden,
+    DannyCarlsen,
+    ElenaGalitsky,
+    NathanChambers,
     Parallax
   },
   methods: {
     addCoverimage: function(data) {
-      this.authorProjects = data
+      this.sarelVanProjects = data
       // console.log(this.image)
 
     },
@@ -96,9 +104,22 @@ export default {
     window.addEventListener('scroll', this.scrollHigh)
   },
   updated() {
-    if (this.selected === 'photography') {
+  
+    if (this.selected === 'Graphic Design') {
+      this.author2Stats = true
+      this.author1Stats = false
+    }
+      if (this.selected === 'Photography') {
+      this.author1Stats = true
+      this.author2Stats = false
+    }
+    if (this.selected === 'Branding') {
       this.author1Stats = true
     }
+    if (this.selected === 'Web design') {
+      this.author1Stats = true
+    }
+
   },
   created() {
     var self = this
@@ -111,34 +132,33 @@ export default {
 
     this.$http.jsonp('https://api.behance.net/v2/users?q=Sarel van Staden&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
       .then(response => {
-        this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
+        this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name),stats: response.body.users[0].stats })
         // console.log(this.designers)
-        this.stats.push({ author1Stat: response.body.users[0].stats })
       }).catch(e => {
         console.log(e);
       }
-      )
+      ),
 
-      // this.$http.jsonp('https://api.behance.net/v2/users?q=Nathan Chambers&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
-      //   .then(response => {
-      //     // this.designers = response
-      //     // console.log(response.body.users[0].images[276])
-      //     console.log(response)
-      //     this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
-      //   }).catch(e => {
-      //     console.log(e);
-      //   }
-      //   )
+      this.$http.jsonp('https://api.behance.net/v2/users?q=Nathan Chambers&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
+        .then(response => {
+          // this.designers = response
+          // console.log(response.body.users[0].images[276])
+          console.log(response)
+          this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name),stats: response.body.users[0].stats })
+        }).catch(e => {
+          console.log(e);
+        }
+        )
     // this.$http.jsonp('https://api.behance.net/v2/users?q=Elena Galitsky&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
     //   .then(response => {
     //     // this.designers = response
     //     // console.log(response.body.users[0].images[276])
     //     console.log(response)
-    //     this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name) })
+    //       this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name),stats: response.body.users[0].stats })
     //   }).catch(e => {
     //     console.log(e);
     //   }
-    //   ),
+    //   )
     //   this.$http.jsonp('https://api.behance.net/v2/users?q=Danny Carlsen&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
     //     .then(response => {
     //       // this.designers = response
@@ -161,7 +181,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: black;
+  background: black;
   transition: background-color 0.4s ease-in;
   align-items: left;
 }
