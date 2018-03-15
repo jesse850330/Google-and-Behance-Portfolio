@@ -13,6 +13,7 @@ import VueResource from 'vue-resource'
 import VueScrollTo from 'vue-scrollto'
 import VueScroll from 'v-scroll'
 import VueParticles from './vue-particles'
+// import VueHighcharts from './vue-highcharts'
 import Home from './components/Home'
 import tillyHome from '../projects/tilly/behance-api/Home'
 import jesseHome from '../projects/jesse/google-api/Home'
@@ -22,6 +23,7 @@ Vue.use(VueResource)
 Vue.use(VueParticles)
 Vue.use(VueScroll)
 Vue.use(Parallax)
+// Vue.use(VueHighcharts)
 Vue.use(VueScrollTo, {
   container: 'body',
   duration: 1800,
