@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="home" v-scroll="scrollHigh"> -->
   <div class="home">
-    <h1> Jesse's profile</h1>
+    <h1> Jesse profile</h1>
       <phone></phone>
   <map></map>
 
