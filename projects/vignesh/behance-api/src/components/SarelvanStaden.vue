@@ -9,10 +9,13 @@
     </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
     <button class='all-projects' v-on:click='showModal()'>ALL PROJECTS</button>
-    <div  v-if='modal'  class='project-modal'>
+    <div v-if='modal' class='project-modal'>
       <h1>Projects</h1>
-      <div v-for='author1Project in author1Projects[0]'>
-        <img  v-bind:src='author1Project.covers[404]'>
+      <button v-on:click="userFilterKey = 'all'" :class="{ active: userFilterKey == 'all' }">All</button>
+      <button v-on:click="userFilterKey = 'mostviewed'" :class="{ active: userFilterKey == 'mostviewed' }">Most viewed</button>
+      <button v-on:click="userFilterKey = 'mostappreciated'" :class="{ active: userFilterKey == 'mostappreciated' }">Most appreciated</button>
+      <div class='project' v-for='author1Project in author1Projects[0]'>
+        <img v-bind:src='author1Project.covers[404]'>
       </div>
     </div>
     <div v-if='modal' v-on:click='closeModal()' class='overlay'></div>
@@ -27,7 +30,8 @@ export default {
   data() {
     return {
       author1Projects: [],
-      modal:false,
+      userFilterKey: 'all',
+      modal: false,
       options: {
         title: {
           text: 'Likes & Comments of most viewed projects',
@@ -87,9 +91,10 @@ export default {
     showModal: function() {
       this.modal = true
     },
-     closeModal: function() {
+    closeModal: function() {
       this.modal = false
-    }
+    },
+
   },
   components: {
     VueHighcharts
@@ -115,9 +120,18 @@ export default {
         return item.stats.views >= 4000;
       })
     },
+    author1Projects() {
+      return this[this.userFilterKey]
+    },
+    all() {
+      return this.author1Projects[0]
+    },
+    mostviewed() {
+      return this.author1Projects[0].filter((author1Project) => author1Project.stats.views >= 4005)
+    }
   },
   mounted() {
-    },
+  },
 }
 </script>
 
@@ -140,6 +154,10 @@ export default {
   padding: 1em;
 }
 
+.active {
+  font-weight: bold;
+}
+
 .vuechart {
   width: 70%;
   /*margin:0 auto;*/
@@ -152,15 +170,30 @@ export default {
 }
 
 .project-modal {
-  width: 90%;
-  height: 90%;
+  width: 80%;
+  height: 80%;
   overflow-y: scroll;
   position: fixed;
-  top: 5%;
-  left: 5%;
-  background-color: lightblue;
+  top: 10%;
+  left: 10%;
   z-index: 1;
-  
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .8s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.project {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.project img {
+  width: 33.3%;
+  height: auto;
+  padding: 2em;
 }
 
 .overlay {
@@ -169,8 +202,9 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(52,52,52,1);
   z-index: 0;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
 }
-
 </style>
