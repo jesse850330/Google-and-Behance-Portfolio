@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="home" v-scroll="scrollHigh"> -->
-  <div class="home">
+  <div  class="home">
     <parallax style='z-index:-999;' :fixed='true'>
       <div class='welcome-page'>
         <div class='welcome-page-details'>
@@ -37,7 +37,7 @@
      
       </div>
       <NathanChambers v-if='author2Stats'></NathanChambers>
-      <SarelVanStaden v-if='author1Stats' @sendCoverimage='addCoverimage'></SarelVanStaden>
+      <SarelVanStaden v-if='author1Stats' @sendCoverimage='addCoverimage' ></SarelVanStaden>
       <ElenaGalitsky v-if='author4Stats'></ElenaGalitsky>
       <DannyCarlsen v-if='author3Stats'></DannyCarlsen>
     </div>
@@ -198,7 +198,7 @@ export default {
 .paraeffect {
   background-color: rgba(0, 0, 0, 0.7);
   transition: background-color 0.2s ease-in;
-  z-index: 1;
+  z-index: -1;
 }
 
 .home1 {

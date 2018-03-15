@@ -9,6 +9,7 @@ import Vue from 'vue'
 import App from './App'
 import VigneshHome from '../projects/vignesh/behance-api/src/components/Home'
 import VueRouter from 'vue-router'
+import VModal from 'vue-js-modal'
 import VueResource from 'vue-resource'
 import VueScrollTo from 'vue-scrollto'
 import VueScroll from 'v-scroll'
@@ -23,6 +24,7 @@ Vue.use(VueResource)
 Vue.use(VueParticles)
 Vue.use(VueScroll)
 Vue.use(Parallax)
+Vue.use(VModal)
 // Vue.use(VueHighcharts)
 Vue.use(VueScrollTo, {
   container: 'body',

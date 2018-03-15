@@ -3,11 +3,19 @@
     <div v-for='author1Project in author1Projects'>
       <h1>Total projects contribution - {{author1Project.length}}</h1>
     </div>
-    <h1>Most viewed Projects</h1>
+    <h1>Preview</h1>
     <div :key="item.name" class='project' v-for='item in mostViewed'>
       <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='item.covers[404]'>
     </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
+    <button class='all-projects' v-on:click='showModal()'>ALL PROJECTS</button>
+    <div  v-if='modal'  class='project-modal'>
+      <h1>Projects</h1>
+      <div v-for='author1Project in author1Projects[0]'>
+        <img  v-bind:src='author1Project.covers[404]'>
+      </div>
+    </div>
+    <div v-if='modal' v-on:click='closeModal()' class='overlay'></div>
   </div>
 </template>
 
@@ -19,6 +27,7 @@ export default {
   data() {
     return {
       author1Projects: [],
+      modal:false,
       options: {
         title: {
           text: 'Likes & Comments of most viewed projects',
@@ -74,6 +83,12 @@ export default {
         lineCharts.addSeries(asyncData);
         lineCharts.hideLoading();
       }, 2000)
+    },
+    showModal: function() {
+      this.modal = true
+    },
+     closeModal: function() {
+      this.modal = false
     }
   },
   components: {
@@ -91,7 +106,7 @@ export default {
         console.log(e);
       }
       )
-    this.$emit('sendCoverimage', (this.author1Projects))
+    this.$emit('sendCoverimage', this.author1Projects)
   },
 
   computed: {
@@ -99,8 +114,10 @@ export default {
       return this.author1Projects[0].filter(function(item) {
         return item.stats.views >= 4000;
       })
-    }
-  }
+    },
+  },
+  mounted() {
+    },
 }
 </script>
 
@@ -110,6 +127,7 @@ export default {
   width: 100%;
   height: 100%;
   margin: 0 auto;
+  position: relative;
 }
 
 .project {
@@ -121,8 +139,38 @@ export default {
   float: left;
   padding: 1em;
 }
-.vuechart{
-  width:70%;
+
+.vuechart {
+  width: 70%;
   /*margin:0 auto;*/
 }
+
+.all-projects {
+  width: 30vw;
+  height: 5vh;
+  text-align: center;
+}
+
+.project-modal {
+  width: 90%;
+  height: 90%;
+  overflow-y: scroll;
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  background-color: lightblue;
+  z-index: 1;
+  
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(52,52,52,1);
+  z-index: 0;
+}
+
 </style>
