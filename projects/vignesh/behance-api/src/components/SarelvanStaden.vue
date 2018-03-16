@@ -4,7 +4,7 @@
       <h1>Total projects contribution - {{author1Project.length}}</h1>
     </div>
     <h1>Preview</h1>
-    <div :key="item.name" class='project' v-for='item in mostViewed'>
+    <div :key="item.name" class='project' v-for='item in mostAppreciated'>
       <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='item.covers[404]'>
     </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
@@ -30,10 +30,9 @@ export default {
   data() {
     return {
       author1Projects: [],
-      allprojects:[],
+      mostAppreciatedProjects: [],
       modal: false,
       source: 0,
-      source1:0,
       options: {
         title: {
           text: 'Likes & Comments of most viewed projects',
@@ -44,8 +43,7 @@ export default {
           x: -20
         },
         xAxis: {
-          categories: ['Title1', 'Title2', 'Title3', 'Title4', 'Title5', 'Title6'
-          ]
+          // categories: [this.mostAppreciatedProjects.name, 'Title2', 'Title3', 'Title4', 'Title5', 'Title6']
         },
         yAxis: {
           min: 1000,
@@ -108,30 +106,33 @@ export default {
     all: function() {
       this.source = 0
     },
-  
+
     updateSource: function(source) {
       this.$http.jsonp('https://api.behance.net/v2/users/5501311/projects?api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
         .then(response => {
           // this.allprojects.push(response.body.projects)
-           this.author1Projects = []
+          this.author1Projects = []
           this.author1Projects.push((response.body.projects).filter(function(item) {
             return item.stats.views >= source;
           }))
-         
+          this.mostAppreciatedProjects.push((response.body.projects).filter(function(item) {
+            return item.stats.appreciations >= 350;
+          }))
           console.log(response)
           // console.log( this.coverImage)
         }).catch(e => {
           console.log(e);
         }
         )
-      // this.$emit('sendCoverimage', this.allprojects)
+      this.$emit('sendCoverimage', this.author1Projects)
     }
   },
   computed: {
-    mostViewed: function() {
+    mostAppreciated: function() {
       return this.author1Projects[0].filter(function(item) {
-        return item.stats.views >= 4000;
+        return item.stats.appreciations >= 350;
       })
+     
     }
   },
   watch: {
