@@ -137,18 +137,18 @@ export default {
       }).catch(e => {
         console.log(e);
       }
-      ),
+      )
 
-      this.$http.jsonp('https://api.behance.net/v2/users?q=Nathan Chambers&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
-        .then(response => {
-          // this.designers = response
-          // console.log(response.body.users[0].images[276])
-          console.log(response)
-          this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name),stats: response.body.users[0].stats })
-        }).catch(e => {
-          console.log(e);
-        }
-        )
+      // this.$http.jsonp('https://api.behance.net/v2/users?q=Nathan Chambers&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
+      //   .then(response => {
+      //     // this.designers = response
+      //     // console.log(response.body.users[0].images[276])
+      //     console.log(response)
+      //     this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name),stats: response.body.users[0].stats })
+      //   }).catch(e => {
+      //     console.log(e);
+      //   }
+      //   )
     // this.$http.jsonp('https://api.behance.net/v2/users?q=Elena Galitsky&api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
     //   .then(response => {
     //     // this.designers = response

@@ -9,11 +9,11 @@
     </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
     <button class='all-projects' v-on:click='showModal()'>ALL PROJECTS</button>
+
     <div v-if='modal' class='project-modal'>
       <h1>Projects</h1>
-      <button v-on:click="userFilterKey = 'all'" :class="{ active: userFilterKey == 'all' }">All</button>
-      <button v-on:click="userFilterKey = 'mostviewed'" :class="{ active: userFilterKey == 'mostviewed' }">Most viewed</button>
-      <button v-on:click="userFilterKey = 'mostappreciated'" :class="{ active: userFilterKey == 'mostappreciated' }">Most appreciated</button>
+      <button v-on:click='all'>All</button>
+      <button v-on:click='viewedMost'>Most viewed</button>
       <div class='project' v-for='author1Project in author1Projects[0]'>
         <img v-bind:src='author1Project.covers[404]'>
       </div>
@@ -30,8 +30,10 @@ export default {
   data() {
     return {
       author1Projects: [],
-      userFilterKey: 'all',
+      allprojects:[],
       modal: false,
+      source: 0,
+      source1:0,
       options: {
         title: {
           text: 'Likes & Comments of most viewed projects',
@@ -79,6 +81,12 @@ export default {
       }
     }
   },
+  components: {
+    VueHighcharts
+  },
+  created() {
+    this.updateSource(this.source);
+  },
   methods: {
     load() {
       let lineCharts = this.$refs.lineCharts;
@@ -94,44 +102,44 @@ export default {
     closeModal: function() {
       this.modal = false
     },
-
+    viewedMost: function() {
+      this.source = 4000
+    },
+    all: function() {
+      this.source = 0
+    },
+  
+    updateSource: function(source) {
+      this.$http.jsonp('https://api.behance.net/v2/users/5501311/projects?api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
+        .then(response => {
+          // this.allprojects.push(response.body.projects)
+           this.author1Projects = []
+          this.author1Projects.push((response.body.projects).filter(function(item) {
+            return item.stats.views >= source;
+          }))
+         
+          console.log(response)
+          // console.log( this.coverImage)
+        }).catch(e => {
+          console.log(e);
+        }
+        )
+      // this.$emit('sendCoverimage', this.allprojects)
+    }
   },
-  components: {
-    VueHighcharts
-  },
-  created() {
-
-    this.$http.jsonp('https://api.behance.net/v2/users/5501311/projects?api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
-      .then(response => {
-        // this.coverImage.push(response.body.projects[1].covers[404])
-        this.author1Projects.push(response.body.projects)
-        console.log(response)
-        // console.log( this.coverImage)
-      }).catch(e => {
-        console.log(e);
-      }
-      )
-    this.$emit('sendCoverimage', this.author1Projects)
-  },
-
   computed: {
     mostViewed: function() {
       return this.author1Projects[0].filter(function(item) {
         return item.stats.views >= 4000;
       })
-    },
-    author1Projects() {
-      return this[this.userFilterKey]
-    },
-    all() {
-      return this.author1Projects[0]
-    },
-    mostviewed() {
-      return this.author1Projects[0].filter((author1Project) => author1Project.stats.views >= 4005)
     }
   },
-  mounted() {
-  },
+  watch: {
+    source: function(val) {
+      this.updateSource(val)
+    }
+  }
+
 }
 </script>
 
@@ -203,7 +211,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 0;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .7);
   display: table;
   transition: opacity .3s ease;
 }
