@@ -52,7 +52,10 @@ const routes = [
   
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
+  scrollBehavior: (to, from, savedPosition) => {
+    return { x: 0, y: 0 }
+  }
 })
 /* eslint-disable no-new */
 new Vue({
