@@ -8,17 +8,31 @@
       <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='item.covers[404]'>
     </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
-    <button class='all-projects' v-on:click='showModal()'>ALL PROJECTS</button>
+    <button class='all-projects-button' v-on:click='showModal()'>ALL PROJECTS</button>
 
     <div v-if='modal' class='project-modal'>
       <h1>Projects</h1>
       <button v-on:click='all'>All</button>
       <button v-on:click='viewedMost'>Most viewed</button>
-      <div class='project' v-for='author1Project in author1Projects[0]'>
-        <img v-bind:src='author1Project.covers[404]'>
+      <div class='all-projects'>
+        <div class='all-project' :class="{highlight:author1Project.name == selected}" @click="selected = author1Project.name" v-for='author1Project in author1Projects[0]'>
+          <img v-bind:src='author1Project.covers[404]'></img>
+          <p>{{author1Project.stats.views}}</p>
+          <p>{{author1Project.stats.appreciations}}</p>
+          <p>{{author1Project.stats.comments}}</p>
+          <div :class="{arrowdown:author1Project.name == selected}"></div>
+        </div>
+        <div v-for='get in getDetails' class='all-projects-details'>
+          <h6>{{filt[0].name}}</h6>
+          <a :href='filt[0].url' target='_blank'>
+            <button>View Gallery</button>
+          </a>
+        </div>
       </div>
+
     </div>
-    <div v-if='modal' v-on:click='closeModal()' class='overlay'></div>
+    <div v-if='modal' v-on:click='closeModal()' class='overlay'>
+    </div>
   </div>
 </template>
 
@@ -31,8 +45,13 @@ export default {
     return {
       author1Projects: [],
       mostAppreciatedProjects: [],
+      modalProjects: [],
+      filt: [],
       modal: false,
       source: 0,
+      selected: '',
+      selected1: '',
+      apd: true,
       options: {
         title: {
           text: 'Likes & Comments of most viewed projects',
@@ -43,7 +62,7 @@ export default {
           x: -20
         },
         xAxis: {
-          // categories: [this.mostAppreciatedProjects.name, 'Title2', 'Title3', 'Title4', 'Title5', 'Title6']
+          categories: ['Title1', 'Title2', 'Title3', 'Title4', 'Title5', 'Title6']
         },
         yAxis: {
           min: 1000,
@@ -84,6 +103,7 @@ export default {
   },
   created() {
     this.updateSource(this.source);
+
   },
   methods: {
     load() {
@@ -118,6 +138,9 @@ export default {
           this.mostAppreciatedProjects.push((response.body.projects).filter(function(item) {
             return item.stats.appreciations >= 350;
           }))
+          for (var i = 0; i <= (response.body.projects).length; i++) {
+            this.modalProjects.push({name: response.body.projects[i].name, url: response.body.projects[i].url })
+          }
           console.log(response)
           // console.log( this.coverImage)
         }).catch(e => {
@@ -132,8 +155,18 @@ export default {
       return this.author1Projects[0].filter(function(item) {
         return item.stats.appreciations >= 350;
       })
-     
+
+    },
+    getDetails: function() {
+        // return item.name ==  
+        for (var j = 0; j < this.modalProjects.length; j++) {
+          if (this.selected === this.modalProjects[j].name) {
+            this.filt = []
+            return this.filt.push(this.modalProjects[j])
+          }
+        }
     }
+
   },
   watch: {
     source: function(val) {
@@ -163,8 +196,26 @@ export default {
   padding: 1em;
 }
 
+.highlight {
+  border: 18px solid maroon;
+  position: relative;
+}
+.arrowdown {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid maroon;
+  position: absolute;
+  bottom: -2em;
+  right: 8.5em;
+}
 .active {
   font-weight: bold;
+}
+
+.showclass {
+  display: block;
 }
 
 .vuechart {
@@ -172,7 +223,7 @@ export default {
   /*margin:0 auto;*/
 }
 
-.all-projects {
+.all-projects-button {
   width: 30vw;
   height: 5vh;
   text-align: center;
@@ -193,16 +244,33 @@ export default {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-.project {
+.all-projects {
   width: 100%;
   height: auto;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.project img {
-  width: 33.3%;
+.all-project {
+  width: 33%;
+  height: auto;
+  margin: 0 auto;
+  
+}
+.all-projects-details{
+}
+.all-project img {
+  width: 100%;
   height: auto;
   padding: 2em;
+}
+
+.all-project p {
+  margin-top: -1em;
+  float: left;
+  width: 23.3%;
+  padding: 0 0 0 4em;
 }
 
 .overlay {
