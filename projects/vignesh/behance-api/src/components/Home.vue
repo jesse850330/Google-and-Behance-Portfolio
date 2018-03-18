@@ -31,23 +31,21 @@
       <div class='designers'>
         <div v-for="(designer,index) in designers" :class="{highlight:designer.name == selected}" id='profileimg' @click="selected = designer.name">
           <img v-bind:src='designer.profile'>
-          <div class='hoverclick'>
-            <p>Click to see details</p>
-          </div>
-          <h2>{{designer.name}}</h2>
           <p>{{designer.field}}</p>
           <p>{{designer.stats.followers}}</p>
           <p>{{designer.stats.views}}</p>
           <p>{{designer.stats.appreciations}}</p>
+          <h2>{{designer.name}}</h2>
+          
           <div :class="{arrowdown:designer.name == selected}"></div>
         </div>
       </div>
-
+    
     </div>
-    <NathanChambers v-if='author2Stats'></NathanChambers>
-    <SarelVanStaden v-if='author1Stats'></SarelVanStaden>
-    <ElenaGalitsky v-if='author4Stats'></ElenaGalitsky>
-    <DannyCarlsen v-if='author3Stats'></DannyCarlsen>
+  <NathanChambers v-if='author2Stats'/>
+      <SarelVanStaden v-if='author1Stats'/>
+      <ElenaGalitsky v-if='author3Stats'/>
+      <DannyCarlsen v-if='author4Stats'/>
   </div>
   <!--API=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c-->
 </template>
@@ -78,8 +76,8 @@ export default {
       image2: false,
       author1Stats: false,
       author2Stats: false,
-      author3Stats: true,
-      author4Stats: true
+      author3Stats: false,
+      author4Stats: false
     }
   },
   components: {
@@ -214,6 +212,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home {
+  width: 100%;
+  height: 100%;
+}
+
 nav li:hover,
 nav li.router-link-active,
 .logo-landingpage,
@@ -271,14 +274,6 @@ nav {
   align-items: left;
 }
 
-.hoverclick {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  visibility: hidden;
-}
 
 .welcome-page-details {
   width: 100%;
@@ -291,20 +286,23 @@ nav {
 .about {
   width: 100%;
   height: 100vh;
-  font-family: 'Bree Serif', serif;
   margin: 0 auto;
   margin-top: 6vh;
 }
-
+.about h1{
+  font-family: 'Bree Serif', serif;
+  font-size: 3em;
+}
 .about p {
   width: 90%;
   height: auto;
-  letter-spacing:0.05em;
+  letter-spacing: 0.05em;
   line-height: 1.6em;
   font-family: 'Merriweather', serif;
   margin: 0 auto;
   font-size: 24px;
-  color:#003D3D;
+  color: #003D3D;
+  margin-top: 1.6em;
 }
 
 .highlight {
@@ -357,17 +355,23 @@ nav {
   width: 100%;
   height: auto;
   padding-top: 1em;
+  margin-top: 4em;
 }
-
+.designers-section h1{
+  font-family: 'Bree Serif', serif;
+  font-size: 3em;
+}
 .designers {
   width: 100%;
+  height: 38vh;
   display: flex;
   justify-content: center;
-  margin-top: 2em;
 }
 
 .designers img {
-  width: 100%;
+  width: 70%;
+  height: 70%;
+  margin-top: 1.6em;
 }
 
 @keyframes bounce {
