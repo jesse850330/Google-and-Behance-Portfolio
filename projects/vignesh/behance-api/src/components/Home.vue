@@ -2,19 +2,32 @@
   <!-- <div class="home" v-scroll="scrollHigh"> -->
   <div class="home">
     <div class='welcome-page'>
+      <nav>
+        <ul>
+          <li class='aboutnav' v-scroll-to="'.about p'">About</li>
+          <li v-scroll-to="'.designers'">Designers</li>
+        </ul>
+      </nav>
       <div class='welcome-page-details'>
+        <img class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fnodejs-interactive-logo-center.png?1521338872084"></img>
         <h1>Showcasing our designer's work</h1>
         <button v-scroll-to="'.designers'">View our designers</button>
-        <div v-for="(sarelVanProject,index) in sarelVanProjects" v-if='image1' class='welcome-img'>
-          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='sarelVanProject[5].covers[404]'>
-        </div>
-        <div v-for="(sarelVanProject,index) in sarelVanProjects" v-if='image2' class='welcome-img'>
-          <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='sarelVanProject[7].covers[404]'>
+        <div class='welcome-img1' v-for="item in landingImageProjects">
+          <div v-if='image1'>
+            <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='landingimage[2]'>
+          </div>
+          <div v-if='image2'>
+            <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='landingimage[3]'>
+          </div>
         </div>
       </div>
     </div>
+    <div class='about'>
+      <h1>About</h1>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    </div>
     <div class='designers-section'>
-      <h1 class='designers'>Our designers</h1>
+      <h1 class='designers-heading'>Our designers</h1>
       <div class='designers'>
         <div v-for="(designer,index) in designers" :class="{highlight:designer.name == selected}" id='profileimg' @click="selected = designer.name">
           <img v-bind:src='designer.profile'>
@@ -32,7 +45,7 @@
 
     </div>
     <NathanChambers v-if='author2Stats'></NathanChambers>
-    <SarelVanStaden v-if='author1Stats' @sendCoverimage='addCoverimage'></SarelVanStaden>
+    <SarelVanStaden v-if='author1Stats'></SarelVanStaden>
     <ElenaGalitsky v-if='author4Stats'></ElenaGalitsky>
     <DannyCarlsen v-if='author3Stats'></DannyCarlsen>
   </div>
@@ -55,6 +68,9 @@ export default {
       clicked: false,
       scrollPosition: null,
       position: null,
+      projectSize: Number,
+      landingimage: [],
+      random: Number,
       names: [],
       selected: '',
       profilehover: false,
@@ -150,6 +166,14 @@ export default {
         console.log(e);
       }
       )
+    withTimeout(1000, this.$http.jsonp('https://api.behance.net/v2/users/5501311/projects?api_key=07mrxT7XsAsYl56ltnyvxtv3ZBVlN6rO'))
+      .then(response => {
+        this.sarelVanProjects.push((response.body.projects))
+        this.projectSize = (response.body.projects).length
+      }).catch(e => {
+        console.log(e);
+      }
+      )
     withTimeout(2000, this.$http.jsonp('https://api.behance.net/v2/users?q=Nathan Chambers&api_key=JYT3SLhZ4tgf2qJkRjkweXseBxh025ZO'))
       .then(response => {
         this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
@@ -174,12 +198,68 @@ export default {
         console.log(e);
       }
       )
+  },
+  computed: {
+    landingImageProjects: function() {
+      this.landingimage = []
+      this.random = Math.floor((Math.random() * (this.projectSize - 2)) + 1);
+      for (var i = this.random; i <= (this.random + 3); i++) {
+        this.landingimage.push(this.sarelVanProjects[0][i].covers[404])
+      }
+      return this.landingimage
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+nav li:hover,
+nav li.router-link-active,
+.logo-landingpage,
+nav li.router-link-exact-active {
+  cursor: pointer;
+}
+
+.navcolor {
+  color: white;
+}
+
+nav ul li {
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 2vh;
+  font-size: 1.75em;
+  color: white;
+  line-height: 50px;
+  display: inline;
+  margin-right: 3vw;
+  font-family: 'Bree Serif', serif;
+}
+
+.aboutnav {
+  border-right: 0.1em solid green;
+  padding-right: 1.5em;
+}
+
+nav {
+  position: absolute;
+  width: 60%;
+  padding: 0.4em 0 0.4em 0;
+  height: 100px;
+  text-align: right;
+  margin: 0 auto;
+  top: 0;
+  right: 0;
+}
+
+.logo-landingpage {
+  width: auto;
+  height: 90px;
+}
+
 .welcome-page {
   width: 100%;
   height: 100vh;
@@ -201,10 +281,30 @@ export default {
 }
 
 .welcome-page-details {
-  width: 60%;
+  width: 100%;
   height: 30%;
   text-align: center;
-  margin: 3em;
+  margin-top: -2.5em;
+  z-index: 1111;
+}
+
+.about {
+  width: 100%;
+  height: 100vh;
+  font-family: 'Bree Serif', serif;
+  margin: 0 auto;
+  margin-top: 6vh;
+}
+
+.about p {
+  width: 90%;
+  height: auto;
+  letter-spacing:0.05em;
+  line-height: 1.6em;
+  font-family: 'Merriweather', serif;
+  margin: 0 auto;
+  font-size: 24px;
+  color:#003D3D;
 }
 
 .highlight {
@@ -238,18 +338,18 @@ export default {
   z-index: 1111;
 }
 
-.welcome-img {
-  width: 40%;
-  height: 310px;
+.welcome-img1 {
+  width: 30%;
+  height: 30%;
   overflow: hidden;
   position: absolute;
-  right: 1vw;
-  top: 30vh;
-  animation: bounce 3s;
+  left: 0;
+  top: 55vh;
+  animation: bounce 4s;
 }
 
-.welcome-img img {
-  width: 40%;
+.welcome-img1 img {
+  width: 30%;
   height: 310px;
 }
 
@@ -262,22 +362,20 @@ export default {
 .designers {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 2em;
 }
 
-#profileimg {
-  position: relative;
+.designers img {
+  width: 100%;
 }
-
-
 
 @keyframes bounce {
   0% {
     transform: scale(0.96);
   }
   50% {
-    transform: scale(1.01);
+    transform: scale(1.05);
   }
   100% {
     transform: scale(1);

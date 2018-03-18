@@ -100,8 +100,8 @@ export default {
   },
   created() {
     this.updateSource(this.source);
-
   },
+
   methods: {
     load() {
       let lineCharts = this.$refs.lineCharts;
@@ -127,20 +127,16 @@ export default {
     updateSource: function(source) {
       this.$http.jsonp('https://api.behance.net/v2/users/5501311/projects?api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
         .then(response => {
-          // this.allprojects.push(response.body.projects)
           this.author1Projects = []
           this.author1Projects.push((response.body.projects).filter(function(item) {
             return item.stats.views >= source;
           }))
           this.previewProjects.push((response.body.projects))
           this.projectSize = (response.body.projects).length
-          console.log(response)
-          // console.log( this.coverImage)
         }).catch(e => {
           console.log(e);
         }
         )
-      this.$emit('sendCoverimage', this.author1Projects)
     }
   },
   computed: {
