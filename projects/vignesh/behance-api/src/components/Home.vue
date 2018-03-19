@@ -84,9 +84,23 @@
           <i class="glyphicon glyphicon-envelope"></i>
           <p>createrbase.com</p>
         </div>
-        </div>
+      </div>
+      <div class='behance-profile'>
+        <a :href='designers[3].url' target='_blank'>
+          <h3>Sarel VanStaden</h3>
+        </a>
+        <a :href='designers[1].url' target='_blank'>
+          <h3>Nathan Chambers</h3>
+        </a>
+        <a :href='designers[0].url' target='_blank'>
+          <h3>Elena Galitsky</h3>
+        </a>
+        <a :href='designers[2].url' target='_blank'>
+          <h3>Danny Carlsen</h3>
+        </a>
       </div>
     </div>
+  </div>
   </div>
   <!--API=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c-->
 </template>
@@ -199,8 +213,8 @@ export default {
     }, 4000)
     withTimeout(1000, this.$http.jsonp('https://api.behance.net/v2/users?q=Sarel van Staden&api_key=07mrxT7XsAsYl56ltnyvxtv3ZBVlN6rO'))
       .then(response => {
-        this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
-        // console.log(this.designers)
+        this.designers.push({ url: response.body.users[0].url, profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
+        console.log(response)
       }).catch(e => {
         console.log(e);
       }
@@ -215,7 +229,7 @@ export default {
       )
     withTimeout(2000, this.$http.jsonp('https://api.behance.net/v2/users?q=Nathan Chambers&api_key=JYT3SLhZ4tgf2qJkRjkweXseBxh025ZO'))
       .then(response => {
-        this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
+        this.designers.push({ url: response.body.users[0].url, profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
         // console.log(this.designers)
       }).catch(e => {
         console.log(e);
@@ -223,7 +237,7 @@ export default {
       )
     withTimeout(3000, this.$http.jsonp('https://api.behance.net/v2/users?q=Elena Galitsky&api_key=ERxjVnISOzDju1jbpE8G1G53GZbfN3sF'))
       .then(response => {
-        this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
+        this.designers.push({ url: response.body.users[0].url, profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
         // console.log(this.designers)
       }).catch(e => {
         console.log(e);
@@ -231,7 +245,7 @@ export default {
       )
     withTimeout(4000, this.$http.jsonp('https://api.behance.net/v2/users?q=Danny Carlsen&api_key=Zp2mg75r7GRjJTNuApsLtgPP32ocfhpS'))
       .then(response => {
-        this.designers.push({ profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
+        this.designers.push({ url: response.body.users[0].url, profile: response.body.users[0].images[276], field: response.body.users[0].fields[0], name: (response.body.users[0].first_name + response.body.users[0].last_name), stats: response.body.users[0].stats })
         // console.log(this.designers)
       }).catch(e => {
         console.log(e);
@@ -380,9 +394,11 @@ nav {
 .about-photography p {
   font-size: 20px;
 }
-.overall-stat  {
+
+.overall-stat {
   background-color: rgba(255, 242, 207, 0.7);
 }
+
 .overall-stat span {
   padding: 0.2em 0 1em 0;
 }
@@ -391,16 +407,15 @@ nav {
   display: inline;
   margin-left: 0.5em;
   font-size: 1.2em;
-  margin-top:-2em;
-  
+  margin-top: -2em;
 }
 
 .highlight {
   /* border: 10px solid maroon; */
   position: relative;
-  height:55%;
+  height: 55%;
   outline: 10px solid maroon;
-  padding-bottom:15px;
+  padding-bottom: 15px;
 }
 
 .arrowdown {
@@ -461,31 +476,31 @@ nav {
   display: flex;
   justify-content: space-around;
 }
-.designer{
+
+.designer {
   background-color: rgba(255, 242, 207, 0.7);
 }
+
 .designers img {
   width: 100%;
   height: 80%;
   margin: -.2em 1em 1em 0em;
 }
-.designers h3{
+
+.designers h3 {
   width: 100%;
   text-align: center;
   margin-top: -0.5em;
-  padding:0.5em;
+  padding: 0.5em;
   font-family: 'Bree Serif', serif;
 }
-.designers p{
+
+.designers p {
   width: 100%;
   text-align: center;
   margin-top: -1.5em;
-  padding:0.5em;
+  padding: 0.5em;
   font-family: 'Bree Serif', serif;
-}
-.footer {
-  width: 100%;
-  height: auto;
 }
 
 @keyframes bounce {
@@ -500,49 +515,47 @@ nav {
   }
 }
 
-.footer{
-      width:100%;
-      height:10vh;
-      margin-top:2em;
-      background-color:#003D3D;
+.footer {
+  width: 100%;
+  display: flex;
+  height: auto;
+  margin-top: 2em;
+  background-color: #003D3D;
+  color:white;
 }
-.address{
-      display:flex;
-      padding:1em 0em 0em 3em;
-      justify-content:space-around; 
-      padding-top:3vh;  
+.footer a{
+  color:white;
+
 }
-.mail{
-      height:3em;
-      font-size:1.5em;
+.address {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 1em 0em 0em 10em;
+  justify-content: center;
+  padding-top: 4vh;
 }
-.mail p{
-      display:inline;
-      color:white;
-      padding-left:0.75em;
-      font-family: 'Exo';
+
+.mail {
+  text-align: left;
+  height: 3em;
+  font-size: 1.5em;
+  color: white;
+
 }
-.fa{
-      padding: 0.5em;
-      height:2em;
-      width: 2em;
-      text-align: center;
-      text-decoration: none;
-      margin: 5px 2px;
+
+.mail p {
+  display: inline;
+  color: white;
+  padding-left: 0.75em;
+  font-family: 'Exo';
 }
-.fa:hover {
-      opacity: 0.8;
-}
-.fa-facebook {
-      background: #3B5998;
-      color: white;
-}
-.fa-twitter {
-      background: #55ACEE;
-      color: white;
-}
-.fa-youtube {
-      background: #bb0000;
-      color: white;
+.behance-profile{
+  display:flex;
+  flex-direction: column;
+  width:50%;
+  height:auto ;
+ text-align: left;
+ padding-left:15em;
 }
 </style>

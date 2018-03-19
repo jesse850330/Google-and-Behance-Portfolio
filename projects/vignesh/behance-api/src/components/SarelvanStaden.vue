@@ -68,7 +68,7 @@ export default {
       selected: '',
       options: {
         title: {
-          text: 'Likes & Comments of most viewed projects',
+          text: 'Likes & Views of most viewed projects',
           x: -20 //center
         },
         subtitle: {
@@ -205,7 +205,7 @@ export default {
   float: left;
   margin-left:6%;
   border:0.1em solid green;
-  margin-bottom:2em;
+  margin-bottom:3em;
   box-shadow: 1px 3px grey;
 }
 .projects h4{
@@ -249,7 +249,7 @@ export default {
   width: 20vw;
   height: 5vh;
   text-align: center;
-  margin:1em 0em;
+  margin:0em 0em;
   background-color: #785000;
   color:white;
   font-family: 'Bree Serif', serif;
