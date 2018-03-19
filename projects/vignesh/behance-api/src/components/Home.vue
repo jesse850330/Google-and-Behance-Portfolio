@@ -46,9 +46,9 @@
     <div class='designers-section'>
       <h1 class='designers-heading'>Our designers</h1>
       <div class='designers'>
-        <div v-for="(designer,index) in designers" :class="{highlight:designer.name == selected}" id='profileimg' @click="selected = designer.name">
+        <div v-for="(designer,index) in designers" class='designer' :class="{highlight:designer.name == selected}" id='profileimg' @click="selected = designer.name">
           <img v-bind:src='designer.profile'>
-          <h2>{{designer.name}}</h2>
+          <h3>{{designer.name}}</h3>
           <p>{{designer.field}}</p>
           <div class='overall-stat'>
             <span class="glyphicon glyphicon-eye-open">
@@ -58,7 +58,7 @@
               <p>{{designer.stats.followers}}</p>
             </span>
             <span class="	glyphicon glyphicon-thumbs-up">
-              <p></p>{{designer.stats.appreciations}}</p>
+              <p>{{designer.stats.appreciations}}</p>
             </span>
           </div>
           <div :class="{arrowdown:designer.name == selected}"></div>
@@ -380,28 +380,35 @@ nav {
 .about-photography p {
   font-size: 20px;
 }
-
+.overall-stat  {
+  background-color: rgba(255, 242, 207, 0.7);
+}
 .overall-stat span {
-  padding: 0.2em;
+  padding: 0.2em 0 1em 0;
 }
 
 .overall-stat p {
   display: inline;
   margin-left: 0.5em;
   font-size: 1.2em;
+  margin-top:-2em;
+  
 }
 
 .highlight {
-  border: 18px solid maroon;
+  /* border: 10px solid maroon; */
   position: relative;
+  height:55%;
+  outline: 10px solid maroon;
+  padding-bottom:15px;
 }
 
 .arrowdown {
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid maroon;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 25px solid maroon;
   position: absolute;
   bottom: -2em;
   right: 7.5em;
@@ -438,7 +445,7 @@ nav {
 }
 
 .designers-section {
-  width: 80%;
+  width: 100%;
   height: auto;
   margin: 0 auto;
 }
@@ -450,17 +457,32 @@ nav {
 
 .designers {
   width: 100%;
-  height: 38vh;
+  height: auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
-
+.designer{
+  background-color: rgba(255, 242, 207, 0.7);
+}
 .designers img {
-  width: 60%;
-  height: 60%;
-  margin-top: 1.6em;
+  width: 100%;
+  height: 80%;
+  margin: -.2em 1em 1em 0em;
 }
-
+.designers h3{
+  width: 100%;
+  text-align: center;
+  margin-top: -0.5em;
+  padding:0.5em;
+  font-family: 'Bree Serif', serif;
+}
+.designers p{
+  width: 100%;
+  text-align: center;
+  margin-top: -1.5em;
+  padding:0.5em;
+  font-family: 'Bree Serif', serif;
+}
 .footer {
   width: 100%;
   height: auto;
@@ -482,13 +504,13 @@ nav {
       width:100%;
       height:10vh;
       margin-top:2em;
-      background-color:black;
+      background-color:#003D3D;
 }
 .address{
       display:flex;
       padding:1em 0em 0em 3em;
       justify-content:space-around; 
-      padding-top:4vh;  
+      padding-top:3vh;  
 }
 .mail{
       height:3em;

@@ -1,12 +1,12 @@
 <template>
   <div class='sarelProjects'>
-    <div v-for='author1Project in author1Projects'>
+    <div class='contri' v-for='author1Project in author1Projects'>
       <h1>Projects - Total contribution - {{projectSize}}</h1>
     </div>
-    <div class='project'>
-      <div v-for='item in previewdProjects'>
-        <img v-bind:src='item.covers[404]'>
-        <h6>{{item.name}}</h6>
+    <div class='projects'>
+      <div class='project' v-for='item in previewdProjects'>
+        <img class='project-img'v-bind:src='item.covers[404]'>
+        <h4>{{item.name}}</h4>
         <div class='overall-stat'>
           <span class="glyphicon glyphicon-eye-open">
             <p>{{item.stats.views}}</p>
@@ -31,7 +31,7 @@
       <div class='all-projects'>
         <div class='all-project' v-for='author1Project in author1Projects[0]'>
           <img v-bind:src='author1Project.covers[404]'></img>
-          <h6>{{author1Project.name}}</h6>
+          <h2>{{author1Project.name}}</h2>
           <p>{{author1Project.stats.views}}</p>
           <p>{{author1Project.stats.appreciations}}</p>
           <p>{{author1Project.stats.comments}}</p>
@@ -76,11 +76,11 @@ export default {
           x: -20
         },
         xAxis: {
-          categories: ['Title1', 'Title2', 'Title3', 'Title4', 'Title5', 'Title6']
+          categories: ['Lexus RC 350 F-Sport fine art photography', 'Maserati GranCabrio fine art ', 'Martini Porsche fine art photography', 'Ford Model T & A fine art photography', '1954 Corvette fine art photography', 'Mustang fine art photography']
         },
         yAxis: {
           min: 1000,
-          max: 10000,
+          max: 35000,
           title: {
             text: 'Number'
           },
@@ -91,7 +91,7 @@ export default {
           }]
         },
         tooltip: {
-          valueSuffix: '°C'
+          valueSuffix: ''
         },
         legend: {
           layout: 'vertical',
@@ -101,12 +101,12 @@ export default {
         },
         series: [
           {
-            name: 'Likes',
-            data: [7000, 8000, 9000, 1400, 1820, 2195]
+            name: 'Views',
+            data: [4341, 4654, 6157, 5217, 32114, 4052]
           },
           {
-            name: 'Comments',
-            data: [30, 490, 587, 85, 119, 152]
+            name: 'Likes',
+            data: [330, 361, 598, 580, 2211, 416]
           }
         ]
       }
@@ -178,28 +178,56 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .sarelProjects {
-  width: 100%;
+  width: 90%;
   height: auto;
   margin: 0 auto;
-  position: relative;
+  margin-top:4em;
+  border:0.1em solid maroon;
 }
-
-.project {
+.contri h1{
+   width: 100%;
+  text-align: center;
+  margin-top: 1em;
+  padding:0.5em;
+  font-family: 'Bree Serif', serif;
+}
+.projects {
   width: 80%;
   height: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-
-
-.project img {
-  width: 60%;
+.project{
+   width: 25%;
   height: 60%;
-  margin-top: 1.6em;
+  float: left;
+  margin-left:6%;
+  border:0.1em solid green;
+  margin-bottom:2em;
+  box-shadow: 1px 3px grey;
 }
-
+.projects h4{
+  width: 100%;
+  text-align: center;
+  margin-top: 1em;
+  padding:0.5em;
+  font-family: 'Bree Serif', serif;
+}
+.projects img {
+  width: 100%;
+  height: 60%;
+  margin-top:-0.2em;
+}
+.projects button{
+  width:60%;
+  font-size: 1.5em;
+  margin:1em 0 1em 0;
+  background-color: #003D3D;
+  color:white;
+  font-family: 'Merriweather', serif;
+}
 .overall-stat span {
   padding: 0.2em;
 }
@@ -208,17 +236,24 @@ export default {
   display: inline;
   margin-left: 0.5em;
   font-size: 1.2em;
+  width:30%;
 }
 
 .vuechart {
   width: 70%;
+  margin-bottom: 2em;
   /*margin:0 auto;*/
 }
 
 .all-projects-button {
-  width: 30vw;
+  width: 20vw;
   height: 5vh;
   text-align: center;
+  margin:1em 0em;
+  background-color: #785000;
+  color:white;
+  font-family: 'Bree Serif', serif;
+  font-size: 1.25em;
 }
 
 .project-modal {
@@ -276,4 +311,12 @@ export default {
   display: table;
   transition: opacity .3s ease;
 }
+@media screen and (max-width:1400px){
+.project-img {
+  width: 40%;
+  height: 40%;
+  margin-top: 1.6em;
+}
+}
+
 </style>
