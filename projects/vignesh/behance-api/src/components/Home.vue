@@ -9,7 +9,7 @@
         </ul>
       </nav>
       <div class='welcome-page-details'>
-        <img class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fnodejs-interactive-logo-center.png?1521338872084"></img>
+        <img class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Flogo1.png?1521411151283"></img>
         <h1>Showcasing our designer's work</h1>
         <button v-scroll-to="'.designers'">View our designers</button>
         <div class='welcome-img1' v-for="item in landingImageProjects">
@@ -25,27 +25,68 @@
     <div class='about'>
       <h1>About</h1>
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      <div class='about-field'>
+        <div class='about-webdesign'>
+          <img src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fgalway-website-design.png?1521411600870"></img>
+          <h2>Website design</h2>
+          <p>Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock</p>
+        </div>
+        <div class='about-graphicdesign'>
+          <img src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fgalway-website-design.png?1521411600870"></img>
+          <h2>Graphic design</h2>
+          <p>Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock</p>
+        </div>
+        <div class='about-photography'>
+          <img src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fgalway-website-design.png?1521411600870"></img>
+          <h2>Photography</h2>
+          <p>Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock</p>
+        </div>
+      </div>
     </div>
     <div class='designers-section'>
       <h1 class='designers-heading'>Our designers</h1>
       <div class='designers'>
         <div v-for="(designer,index) in designers" :class="{highlight:designer.name == selected}" id='profileimg' @click="selected = designer.name">
           <img v-bind:src='designer.profile'>
-          <p>{{designer.field}}</p>
-          <p>{{designer.stats.followers}}</p>
-          <p>{{designer.stats.views}}</p>
-          <p>{{designer.stats.appreciations}}</p>
           <h2>{{designer.name}}</h2>
-          
+          <p>{{designer.field}}</p>
+          <div class='overall-stat'>
+            <span class="glyphicon glyphicon-eye-open">
+              <p>{{designer.stats.views}}</p>
+            </span>
+            <span class="glyphicon glyphicon-user">
+              <p>{{designer.stats.followers}}</p>
+            </span>
+            <span class="	glyphicon glyphicon-thumbs-up">
+              <p></p>{{designer.stats.appreciations}}</p>
+            </span>
+          </div>
           <div :class="{arrowdown:designer.name == selected}"></div>
         </div>
       </div>
-    
+
     </div>
-  <NathanChambers v-if='author2Stats'/>
-      <SarelVanStaden v-if='author1Stats'/>
-      <ElenaGalitsky v-if='author3Stats'/>
-      <DannyCarlsen v-if='author4Stats'/>
+    <NathanChambers v-if='author2Stats' />
+    <SarelVanStaden v-if='author1Stats' />
+    <ElenaGalitsky v-if='author3Stats' />
+    <DannyCarlsen v-if='author4Stats' />
+    <div class='footer'>
+      <div class="address">
+        <div class="mail">
+          <i class="glyphicon glyphicon-folder-open"></i>
+          <p>20,Wallstreet,Ohama</p>
+        </div>
+        <div class="mail">
+          <i class="phone glyphicon glyphicon-phone-alt"></i>
+          <p>0800-237-237</p>
+        </div>
+        <div class="mail">
+          <i class="glyphicon glyphicon-envelope"></i>
+          <p>createrbase.com</p>
+        </div>
+        </div>
+      </div>
+    </div>
   </div>
   <!--API=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c-->
 </template>
@@ -70,7 +111,7 @@ export default {
       landingimage: [],
       random: Number,
       names: [],
-      selected: '',
+      selected: 'Sarelvan Staden',
       profilehover: false,
       image1: true,
       image2: false,
@@ -259,8 +300,8 @@ nav {
 }
 
 .logo-landingpage {
-  width: auto;
-  height: 90px;
+  width: 8vw;
+  height: 8vw;
 }
 
 .welcome-page {
@@ -279,20 +320,22 @@ nav {
   width: 100%;
   height: 30%;
   text-align: center;
-  margin-top: -2.5em;
+  margin-top: -5.5em;
   z-index: 1111;
 }
 
 .about {
-  width: 100%;
-  height: 100vh;
+  width: 80%;
+  height: auto;
   margin: 0 auto;
-  margin-top: 6vh;
+  margin-top: 4vh;
 }
-.about h1{
+
+.about h1 {
   font-family: 'Bree Serif', serif;
   font-size: 3em;
 }
+
 .about p {
   width: 90%;
   height: auto;
@@ -303,6 +346,49 @@ nav {
   font-size: 24px;
   color: #003D3D;
   margin-top: 1.6em;
+}
+
+.about-field {
+  margin-top: 3em;
+}
+
+.about-webdesign,
+.about-graphicdesign,
+.about-photography {
+  width: 20vw;
+  height: auto;
+  display: inline-block;
+  border: 0.1em solid green;
+  padding: 1em;
+  margin: 1em;
+}
+
+.about-field h2 {
+  font-family: 'Bree Serif', serif;
+  font-size: 2em;
+}
+
+.about-webdesign img,
+.about-graphicdesign img,
+.about-photography img {
+  width: 30%;
+  height: 30%;
+}
+
+.about-webdesign p,
+.about-graphicdesign p,
+.about-photography p {
+  font-size: 20px;
+}
+
+.overall-stat span {
+  padding: 0.2em;
+}
+
+.overall-stat p {
+  display: inline;
+  margin-left: 0.5em;
+  font-size: 1.2em;
 }
 
 .highlight {
@@ -352,15 +438,16 @@ nav {
 }
 
 .designers-section {
-  width: 100%;
+  width: 80%;
   height: auto;
-  padding-top: 1em;
-  margin-top: 4em;
+  margin: 0 auto;
 }
-.designers-section h1{
+
+.designers-section h1 {
   font-family: 'Bree Serif', serif;
   font-size: 3em;
 }
+
 .designers {
   width: 100%;
   height: 38vh;
@@ -369,9 +456,14 @@ nav {
 }
 
 .designers img {
-  width: 70%;
-  height: 70%;
+  width: 60%;
+  height: 60%;
   margin-top: 1.6em;
+}
+
+.footer {
+  width: 100%;
+  height: auto;
 }
 
 @keyframes bounce {
@@ -384,5 +476,51 @@ nav {
   100% {
     transform: scale(1);
   }
+}
+
+.footer{
+      width:100%;
+      height:10vh;
+      margin-top:2em;
+      background-color:black;
+}
+.address{
+      display:flex;
+      padding:1em 0em 0em 3em;
+      justify-content:space-around; 
+      padding-top:4vh;  
+}
+.mail{
+      height:3em;
+      font-size:1.5em;
+}
+.mail p{
+      display:inline;
+      color:white;
+      padding-left:0.75em;
+      font-family: 'Exo';
+}
+.fa{
+      padding: 0.5em;
+      height:2em;
+      width: 2em;
+      text-align: center;
+      text-decoration: none;
+      margin: 5px 2px;
+}
+.fa:hover {
+      opacity: 0.8;
+}
+.fa-facebook {
+      background: #3B5998;
+      color: white;
+}
+.fa-twitter {
+      background: #55ACEE;
+      color: white;
+}
+.fa-youtube {
+      background: #bb0000;
+      color: white;
 }
 </style>

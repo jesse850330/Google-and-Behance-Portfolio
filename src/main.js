@@ -17,7 +17,6 @@ import VueParticles from './vue-particles'
 // import VueHighcharts from './vue-highcharts'
 import Home from './components/Home'
 import tillyHome from '../projects/tilly/behance-api/Home'
-import jesseHome from '../projects/jesse/google-api/Home'
 import Parallax from './components/Parallax.vue'
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -44,7 +43,6 @@ const routes = [
   { path: '/', component: Home},
   // { path: '/vigneshHome', component: vigneshHome},
   { path: '/oliverHome', component: tillyHome},
-  { path: '/jesseHome', component: jesseHome},
   { path: '/vigneshHome', component: VigneshHome}
 ]
   

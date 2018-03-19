@@ -19,7 +19,7 @@
       </div>
     </div>
    <button   class='jesseHome'>
-      <router-link v-bind:to="'/jesseHome'">jesseHome</router-link>
+      <a>jesseHome</a>
     </button>
   </div>
 </template>

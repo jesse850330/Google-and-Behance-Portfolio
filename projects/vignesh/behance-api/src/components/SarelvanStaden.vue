@@ -1,21 +1,35 @@
 <template>
   <div class='sarelProjects'>
     <div v-for='author1Project in author1Projects'>
-      <h1>Total projects contribution - {{author1Project.length}}</h1>
+      <h1>Projects - Total contribution - {{projectSize}}</h1>
     </div>
-    <h1>Preview</h1>
-    <div :key="item.name" class='project' v-for='item in previewdProjects'>
-      <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='item.covers[404]'>
+    <div class='project'>
+      <div v-for='item in previewdProjects'>
+        <img v-bind:src='item.covers[404]'>
+        <h6>{{item.name}}</h6>
+        <div class='overall-stat'>
+          <span class="glyphicon glyphicon-eye-open">
+            <p>{{item.stats.views}}</p>
+          </span>
+          <span class="glyphicon glyphicon-user">
+            <p>{{item.stats.appreciations}}</p>
+          </span>
+          <span class="	glyphicon glyphicon-thumbs-up">
+            <p></p>{{item.stats.comments}}</p>
+          </span>
+        </div>
+        <a :href='item.url' target='_blank'>
+          <button>View Gallery</button>
+        </a>
+      </div>
     </div>
-    <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
-    <button class='all-projects-button' v-on:click='showModal()'>ALL PROJECTS</button>
 
     <div v-if='modal' class='project-modal'>
       <h1>Projects</h1>
       <button v-on:click='all'>All</button>
       <button v-on:click='viewedMost'>Most viewed</button>
       <div class='all-projects'>
-        <div class='all-project' :class="{highlight:author1Project.name == selected}" @click="selected = author1Project.name" v-for='author1Project in author1Projects[0]'>
+        <div class='all-project' v-for='author1Project in author1Projects[0]'>
           <img v-bind:src='author1Project.covers[404]'></img>
           <h6>{{author1Project.name}}</h6>
           <p>{{author1Project.stats.views}}</p>
@@ -24,11 +38,14 @@
           <a :href='author1Project.url' target='_blank'>
             <button>View Gallery</button>
           </a>
-          <div :class="{arrowdown:author1Project.name == selected}"></div>
         </div>
       </div>
 
     </div>
+    <div>
+    <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
+    </div>
+    <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
     <div v-if='modal' v-on:click='closeModal()' class='overlay'>
     </div>
   </div>
@@ -43,8 +60,8 @@ export default {
     return {
       author1Projects: [],
       previewProjects: [],
-      preview:[],
-      random:Number,
+      preview: [],
+      random: Number,
       projectSize: Number,
       modal: false,
       source: 0,
@@ -142,8 +159,8 @@ export default {
   computed: {
     previewdProjects: function() {
       this.preview = []
-      this.random = Math.floor((Math.random() * (this.projectSize-6)) + 1);
-      for (var i = this.random; i <= (this.random+5); i++) {
+      this.random = Math.floor((Math.random() * (this.projectSize - 6)) + 1);
+      for (var i = this.random; i <= (this.random + 5); i++) {
         this.preview.push(this.previewProjects[0][i])
       }
       return this.preview
@@ -162,43 +179,35 @@ export default {
 <style scoped>
 .sarelProjects {
   width: 100%;
-  height: 100%;
+  height: auto;
   margin: 0 auto;
   position: relative;
 }
 
 .project {
-  margin-left: 10%;
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
 }
+
 
 .project img {
-  width: 30%;
-  float: left;
-  padding: 1em;
+  width: 60%;
+  height: 60%;
+  margin-top: 1.6em;
 }
 
-.highlight {
-  border: 18px solid maroon;
-  position: relative;
+.overall-stat span {
+  padding: 0.2em;
 }
 
-.arrowdown {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid maroon;
-  position: absolute;
-  bottom: -2em;
-  right: 8.5em;
-}
-
-.active {
-  font-weight: bold;
-}
-
-.showclass {
-  display: block;
+.overall-stat p {
+  display: inline;
+  margin-left: 0.5em;
+  font-size: 1.2em;
 }
 
 .vuechart {
@@ -241,7 +250,7 @@ export default {
   margin: 0 auto;
 }
 
-.all-projects-details {}
+
 
 .all-project img {
   width: 100%;
