@@ -1,34 +1,64 @@
 <template>
   <div class='sarelProjects'>
-    <div v-for='author1Project in author1Projects'>
-      <h1>Total projects contribution - {{author1Project.length}}</h1>
+    <div class='contri' v-for='author1Project in author1Projects'>
+      <h1>Projects</h1>
+      <h3>Total contribution - {{projectSize}}</h3>
     </div>
-    <h1>Preview</h1>
-    <div :key="item.name" class='project' v-for='item in previewdProjects'>
-      <img style='margin:0 auto;margin-bottom:2em;' v-bind:src='item.covers[404]'>
+    <div class='projects'>
+      <div class='project' v-for='item in previewdProjects'>
+        <img class='project-img' v-bind:src='item.covers[404]'>
+        <h4>{{item.name}}</h4>
+        <div class='overall-stat'>
+          <span class="glyphicon glyphicon-eye-open">
+            <p>{{item.stats.views}}</p>
+          </span>
+          <span class="glyphicon glyphicon-user">
+            <p>{{item.stats.appreciations}}</p>
+          </span>
+          <span class="	glyphicon glyphicon-thumbs-up">
+            <p>{{item.stats.comments}}</p>
+          </span>
+        </div>
+        <a :href='item.url' target='_blank'>
+          <button>View Project</button>
+        </a>
+      </div>
+    </div>
+    <transition name="modal">
+      <div v-if='modal' class='project-modal'>
+        <div>
+          <h1>Projects</h1>
+        </div>
+        <div class='project-filter--buttons'>
+          <p :class="{highlight:showallProject}" v-on:click='all'>All</p>
+          <p :class="{highlight:showfilteredProject}" v-on:click='viewedMost'>Popular</p>
+        </div>
+        <div class='all-projects'>
+          <div class='all-project' v-for='author1Project in author1Projects[0]'>
+            <img v-bind:src='author1Project.covers[404]'></img>
+            <h4>{{author1Project.name}}</h4>
+            <div class='over-stat'>
+              <span class="glyphicon glyphicon-eye-open">
+                <p>{{author1Project.stats.views}}</p>
+              </span>
+              <span class="glyphicon glyphicon-user">
+                <p>{{author1Project.stats.appreciations}}</p>
+              </span>
+              <span class="	glyphicon glyphicon-thumbs-up">
+                <p>{{author1Project.stats.comments}}</p>
+              </span>
+            </div>
+            <a :href='author1Project.url' target='_blank'>
+              <button>View Project</button>
+            </a>
+          </div>
+        </div>
+    </div>
+    </transition>
+    <div>
+      <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
     </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
-    <button class='all-projects-button' v-on:click='showModal()'>ALL PROJECTS</button>
-
-    <div v-if='modal' class='project-modal'>
-      <h1>Projects</h1>
-      <button v-on:click='all'>All</button>
-      <button v-on:click='viewedMost'>Most viewed</button>
-      <div class='all-projects'>
-        <div class='all-project' :class="{highlight:author1Project.name == selected}" @click="selected = author1Project.name" v-for='author1Project in author1Projects[0]'>
-          <img v-bind:src='author1Project.covers[404]'></img>
-          <h6>{{author1Project.name}}</h6>
-          <p>{{author1Project.stats.views}}</p>
-          <p>{{author1Project.stats.appreciations}}</p>
-          <p>{{author1Project.stats.comments}}</p>
-          <a :href='author1Project.url' target='_blank'>
-            <button>View Gallery</button>
-          </a>
-          <div :class="{arrowdown:author1Project.name == selected}"></div>
-        </div>
-      </div>
-
-    </div>
     <div v-if='modal' v-on:click='closeModal()' class='overlay'>
     </div>
   </div>
@@ -43,15 +73,17 @@ export default {
     return {
       author1Projects: [],
       previewProjects: [],
-      preview:[],
-      random:Number,
+      showallProject: true,
+      showfilteredProject: false,
+      preview: [],
+      random: Number,
       projectSize: Number,
       modal: false,
       source: 0,
       selected: '',
       options: {
         title: {
-          text: 'Likes & Comments of most viewed projects',
+          text: 'Likes & Views of most viewed projects',
           x: -20 //center
         },
         subtitle: {
@@ -59,11 +91,11 @@ export default {
           x: -20
         },
         xAxis: {
-          categories: ['Title1', 'Title2', 'Title3', 'Title4', 'Title5', 'Title6']
+          categories: ['Lexus RC 350 F-Sport fine art photography', 'Maserati GranCabrio fine art ', 'Martini Porsche fine art photography', 'Ford Model T & A fine art photography', '1954 Corvette fine art photography', 'Mustang fine art photography']
         },
         yAxis: {
           min: 1000,
-          max: 10000,
+          max: 35000,
           title: {
             text: 'Number'
           },
@@ -74,7 +106,7 @@ export default {
           }]
         },
         tooltip: {
-          valueSuffix: '°C'
+          valueSuffix: ''
         },
         legend: {
           layout: 'vertical',
@@ -84,12 +116,12 @@ export default {
         },
         series: [
           {
-            name: 'Likes',
-            data: [7000, 8000, 9000, 1400, 1820, 2195]
+            name: 'Views',
+            data: [4341, 4654, 6157, 5217, 32114, 4052]
           },
           {
-            name: 'Comments',
-            data: [30, 490, 587, 85, 119, 152]
+            name: 'Likes',
+            data: [330, 361, 598, 580, 2211, 416]
           }
         ]
       }
@@ -100,8 +132,8 @@ export default {
   },
   created() {
     this.updateSource(this.source);
-
   },
+
   methods: {
     load() {
       let lineCharts = this.$refs.lineCharts;
@@ -119,35 +151,35 @@ export default {
     },
     viewedMost: function() {
       this.source = 4000
+      this.showfilteredProject = true
+      this.showallProject = false
     },
     all: function() {
       this.source = 0
+      this.showallProject = true
+      this.showfilteredProject = false
     },
 
     updateSource: function(source) {
       this.$http.jsonp('https://api.behance.net/v2/users/5501311/projects?api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
         .then(response => {
-          // this.allprojects.push(response.body.projects)
           this.author1Projects = []
           this.author1Projects.push((response.body.projects).filter(function(item) {
             return item.stats.views >= source;
           }))
           this.previewProjects.push((response.body.projects))
           this.projectSize = (response.body.projects).length
-          console.log(response)
-          // console.log( this.coverImage)
         }).catch(e => {
           console.log(e);
         }
         )
-      this.$emit('sendCoverimage', this.author1Projects)
     }
   },
   computed: {
     previewdProjects: function() {
       this.preview = []
-      this.random = Math.floor((Math.random() * (this.projectSize-6)) + 1);
-      for (var i = this.random; i <= (this.random+5); i++) {
+      this.random = Math.floor((Math.random() * (this.projectSize - 6)) + 1);
+      for (var i = this.random; i <= (this.random + 5); i++) {
         this.preview.push(this.previewProjects[0][i])
       }
       return this.preview
@@ -164,65 +196,124 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+button {
+  box-sizing: content-box;
+  border: none;
+}
+
 .sarelProjects {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: auto;
   margin: 0 auto;
-  position: relative;
+  margin-top: 4em;
+  border: 0.1em solid #cccccc;
+}
+
+.contri {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+}
+
+.contri h1 {
+  width: 38%;
+  font-family: 'Bree Serif', serif;
+}
+
+.contri h3 {
+  width: 50%;
+  font-family: 'Bree Serif', serif;
+}
+
+.projects {
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .project {
-  margin-left: 10%;
-}
-
-.project img {
-  width: 30%;
+  width: 25%;
+  height: 60%;
   float: left;
-  padding: 1em;
+  margin-left: 6%;
+  border: 0.1em solid green;
+  margin-bottom: 3em;
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.45);
 }
 
-.highlight {
-  border: 18px solid maroon;
-  position: relative;
+.projects h4 {
+  width: 100%;
+  text-align: center;
+  margin-top: 1em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
 }
 
-.arrowdown {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid maroon;
-  position: absolute;
-  bottom: -2em;
-  right: 8.5em;
+.projects img {
+  width: 100.1%;
+  height: 60%;
+  margin-top: -0.2em;
 }
 
-.active {
-  font-weight: bold;
+.projects button {
+  width: 60%;
+  border-radius: 8;
+  font-size: 1.5em;
+  margin: 1em 0 1em 0;
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+  padding: 8px;
+  font-family: 'Merriweather', serif;
 }
 
-.showclass {
-  display: block;
+
+.projects button:hover {
+  background: #000000;
+  text-decoration: none;
+  color: white;
+  border: 2px solid #000000;
+  transition: 0.5s;
+}
+
+.overall-stat span {
+  padding: 0.2em;
+}
+
+.overall-stat p {
+  display: inline;
+  margin-left: 0.5em;
+  font-size: 1.2em;
 }
 
 .vuechart {
   width: 70%;
+  margin-bottom: 2em;
   /*margin:0 auto;*/
 }
 
 .all-projects-button {
-  width: 30vw;
+  width: 20vw;
   height: 5vh;
   text-align: center;
+  margin: 0em 0em;
+  background-color: #785000;
+  color: white;
+  font-family: 'Bree Serif', serif;
+  font-size: 1.25em;
 }
 
 .project-modal {
-  width: 80%;
+  width: 60%;
   height: 80%;
   overflow-y: scroll;
   position: fixed;
   top: 10%;
-  left: 10%;
+  left: 20%;
   z-index: 1;
   background-color: #fff;
   border-radius: 2px;
@@ -231,26 +322,74 @@ export default {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+.project-modal h1 {
+  width: 80%;
+  text-align: left;
+  margin: 1em 1em 1em 4.4em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
+}
+.modal-enter-active,
+.modal-leave-active { transition: opacity 450ms }
+
+.modal-enter,
+.modal-leave-to { opacity: 0 }
+
+.modal-leave,
+.modal-enter-to { opacity: 1 }
+
 .all-projects {
-  width: 100%;
+  width: 80%;
   height: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .all-project {
-  width: 33%;
-  height: auto;
-  margin: 0 auto;
+  width: 25%;
+  height: 60%;
+  float: left;
+  margin-left: 6%;
+  border: 0.1em solid green;
+  margin-bottom: 3em;
+  box-shadow: 1px 3px grey;
 }
 
-.all-projects-details {}
+.all-project h4 {
+  width: 100%;
+  text-align: center;
+  margin-top: 1em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
+}
+
+.project-filter--buttons {
+  position: absolute;
+  top: 3.5em;
+  right: 10.5em;
+}
+
+.project-filter--buttons p {
+  width: 6vw;
+  display: inline-block;
+}
+
+.project-filter--buttons p:first-child {
+  border-right: 0.1em solid black;
+}
 
 .all-project img {
   width: 100%;
-  height: auto;
-  padding: 2em;
+  height: 60%;
+  margin-top: -0.2em;
+}
+
+.highlight {
+  color: #785000;
+  font-weight: bold;
 }
 
 .all-project p {
@@ -258,6 +397,43 @@ export default {
   float: left;
   width: 23.3%;
   padding: 0 0 0 4em;
+}
+
+.over-stat {
+  width: 90%;
+}
+
+.over-stat span {
+  width: 30%;
+  padding: 0.2em;
+}
+
+.over-stat p {
+  display: inline;
+  /*margin-left: 0.5em;*/
+  /*font-size: 1.2em;*/
+}
+
+.all-project button {
+  width: 70%;
+  border-radius: 8;
+  font-size: 1.5em;
+  margin: 1em 0 1em 0;
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+  padding: 8px;
+  font-family: 'Merriweather', serif;
+}
+
+
+
+.all-projects button:hover {
+  background: #000000;
+  text-decoration: none;
+  color: white;
+  border: 2px solid #000000;
+  transition: 0.5s;
 }
 
 .overlay {
@@ -270,5 +446,13 @@ export default {
   background-color: rgba(0, 0, 0, .7);
   display: table;
   transition: opacity .3s ease;
+}
+
+@media screen and (max-width:1400px) {
+  .project-img {
+    width: 40%;
+    height: 40%;
+    margin-top: 1.6em;
+  }
 }
 </style>

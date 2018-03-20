@@ -21,14 +21,14 @@ export default {
 
   created() {
 
-    // this.$http.jsonp('https://api.behance.net/v2/users/13491869/projects?api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
-    //   .then(response => {
-    //     this.author2Projects.push(response.body.projects)
-    //     console.log(response)
-    //   }).catch(e => {
-    //     console.log(e);
-    //   }
-    //   )
+    this.$http.jsonp('https://api.behance.net/v2/users/13491869/projects?api_key=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c')
+      .then(response => {
+        this.author2Projects.push(response.body.projects)
+        console.log(response)
+      }).catch(e => {
+        console.log(e);
+      }
+      )
   },
     computed: {
     mostViewed: function() {
