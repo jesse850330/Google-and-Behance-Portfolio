@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="home" v-scroll="scrollHigh"> -->
   <div class="home">
     <div class='welcome-page'>
       <nav>
@@ -9,7 +8,7 @@
         </ul>
       </nav>
       <div class='welcome-page-details'>
-        <img class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Flogo1.png?1521411151283"></img>
+        <img class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Flogo1.png?1521509947416"></img>
         <h1>Showcasing our designer's work</h1>
         <button v-scroll-to="'.designers'">View our designers</button>
         <div class='welcome-img1' v-for="item in landingImageProjects">
@@ -71,33 +70,45 @@
     <ElenaGalitsky v-if='author3Stats' />
     <DannyCarlsen v-if='author4Stats' />
     <div class='footer'>
-      <div class="address">
-        <div class="mail">
+    
+      <div class='behance-profile'>
+        <div>
+          <h3>Behance profile</h3>
+        </div>
+        <div class='behance-profile--links'>
+          <a :href='designers[1].url' target='_blank'>
+            <p>Sarel VanStaden</p>
+          </a>
+          <a :href='designers[3].url' target='_blank'>
+            <p>Nathan Chambers</p>
+          </a>
+            <a :href='designers[0].url' target='_blank'>
+            <p>Elena Galitsky</p>
+          </a>
+          <a :href='designers[2].url' target='_blank'>
+            <p>Danny Carlsen</p>
+          </a>
+        </div>
+
+      </div>
+        <div class="address">
+        <div>
+          <h3>Contact</h3>
+        </div>
+        <div  class="mail">
+        <div>
           <i class="glyphicon glyphicon-folder-open"></i>
           <p>20,Wallstreet,Ohama</p>
         </div>
-        <div class="mail">
+        <div>
           <i class="phone glyphicon glyphicon-phone-alt"></i>
           <p>0800-237-237</p>
         </div>
-        <div class="mail">
-          <i class="glyphicon glyphicon-envelope"></i>
-          <p>createrbase.com</p>
         </div>
-      </div>
-      <div class='behance-profile'>
-        <a :href='designers[3].url' target='_blank'>
-          <h3>Sarel VanStaden</h3>
-        </a>
-        <a :href='designers[1].url' target='_blank'>
-          <h3>Nathan Chambers</h3>
-        </a>
-        <a :href='designers[0].url' target='_blank'>
-          <h3>Elena Galitsky</h3>
-        </a>
-        <a :href='designers[2].url' target='_blank'>
-          <h3>Danny Carlsen</h3>
-        </a>
+        <!--<div class="mail">
+              <i class="glyphicon glyphicon-envelope"></i>
+              <p>creater@base.com</p>
+            </div>-->
       </div>
     </div>
   </div>
@@ -125,7 +136,7 @@ export default {
       landingimage: [],
       random: Number,
       names: [],
-      selected: 'Sarelvan Staden',
+      selected: '',
       profilehover: false,
       image1: true,
       image2: false,
@@ -299,7 +310,7 @@ nav ul li {
 
 .aboutnav {
   border-right: 0.1em solid green;
-  padding-right: 1.5em;
+  padding-right: 2.5em;
 }
 
 nav {
@@ -315,7 +326,8 @@ nav {
 
 .logo-landingpage {
   width: 8vw;
-  height: 8vw;
+  height: 6vw;
+  margin-bottom:-1em;
 }
 
 .welcome-page {
@@ -337,12 +349,17 @@ nav {
   margin-top: -5.5em;
   z-index: 1111;
 }
+.welcome-page-details h1{
+  margin-bottom:1em;
 
+}
 .about {
   width: 80%;
   height: auto;
   margin: 0 auto;
   margin-top: 4vh;
+  padding-bottom: 2.25em;
+  /*border-bottom:0.1em solid black;*/
 }
 
 .about h1 {
@@ -374,7 +391,7 @@ nav {
   display: inline-block;
   border: 0.1em solid green;
   padding: 1em;
-  margin: 1em;
+  margin: 0em 1em;
 }
 
 .about-field h2 {
@@ -396,7 +413,7 @@ nav {
 }
 
 .overall-stat {
-  background-color: rgba(255, 242, 207, 0.7);
+  background-color: rgba(255, 242, 207, 0.5);
 }
 
 .overall-stat span {
@@ -414,7 +431,8 @@ nav {
   /* border: 10px solid maroon; */
   position: relative;
   height: 55%;
-  outline: 10px solid maroon;
+  outline: 10px solid #42b983;
+  outline-offset: 20px;
   padding-bottom: 15px;
 }
 
@@ -423,9 +441,9 @@ nav {
   height: 0;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
-  border-top: 25px solid maroon;
+  border-top: 25px solid #42b983;
   position: absolute;
-  bottom: -2em;
+  bottom: -3.5em;
   right: 7.5em;
 }
 
@@ -463,22 +481,25 @@ nav {
   width: 100%;
   height: auto;
   margin: 0 auto;
+  margin-bottom: 7em;
 }
 
 .designers-section h1 {
   font-family: 'Bree Serif', serif;
   font-size: 3em;
+  padding-bottom: 1em;
 }
 
 .designers {
-  width: 100%;
+  width: 80%;
   height: auto;
   display: flex;
   justify-content: space-around;
+  margin-left: 10%;
 }
 
 .designer {
-  background-color: rgba(255, 242, 207, 0.7);
+  background-color: rgba(255, 242, 207, 0.5);
 }
 
 .designers img {
@@ -493,6 +514,7 @@ nav {
   margin-top: -0.5em;
   padding: 0.5em;
   font-family: 'Bree Serif', serif;
+  font-weight: bolder;
 }
 
 .designers p {
@@ -501,6 +523,7 @@ nav {
   margin-top: -1.5em;
   padding: 0.5em;
   font-family: 'Bree Serif', serif;
+  font-weight:normal;
 }
 
 @keyframes bounce {
@@ -518,30 +541,35 @@ nav {
 .footer {
   width: 100%;
   display: flex;
-  height: auto;
+  height: 10vh;
   margin-top: 2em;
   background-color: #003D3D;
-  color:white;
+  color: white;
 }
-.footer a{
-  color:white;
 
+.footer a {
+  color: white;
 }
+
 .address {
   width: 50%;
   display: flex;
   flex-direction: column;
-  padding: 1em 0em 0em 10em;
-  justify-content: center;
-  padding-top: 4vh;
+  padding: 0em 0 0 15em;
 }
-
-.mail {
+.address h3{
   text-align: left;
+  padding-bottom:0.5em;
+}
+.mail {
+   display: flex;
+  flex-direction: row;
+  width:60%;
+justify-content:space-between;
   height: 3em;
-  font-size: 1.5em;
+  font-size: 1.25em;
   color: white;
-
+  
 }
 
 .mail p {
@@ -549,13 +577,32 @@ nav {
   color: white;
   padding-left: 0.75em;
   font-family: 'Exo';
+  font-size: 0.75em;
 }
-.behance-profile{
-  display:flex;
+
+.behance-profile {
+  display: flex;
   flex-direction: column;
-  width:50%;
-  height:auto ;
- text-align: left;
- padding-left:15em;
+  width: 50%;
+  height: auto;
+  text-align: left;
+  padding: 0em 0 0 15em;
+}
+.behance-profile a{
+  width: 50%;
+}
+.behance-profile h3{
+  text-align: left;
+  padding-bottom:0.5em;
+}
+.behance-profile--links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+}
+.behance-profile p{
+  font-size: 1em;
 }
 </style>

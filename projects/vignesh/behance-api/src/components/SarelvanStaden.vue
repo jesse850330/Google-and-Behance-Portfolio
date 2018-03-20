@@ -1,11 +1,12 @@
 <template>
   <div class='sarelProjects'>
     <div class='contri' v-for='author1Project in author1Projects'>
-      <h1>Projects - Total contribution - {{projectSize}}</h1>
+      <h1>Projects</h1>
+      <h2>Total contribution - {{projectSize}}</h2>
     </div>
     <div class='projects'>
       <div class='project' v-for='item in previewdProjects'>
-        <img class='project-img'v-bind:src='item.covers[404]'>
+        <img class='project-img' v-bind:src='item.covers[404]'>
         <h4>{{item.name}}</h4>
         <div class='overall-stat'>
           <span class="glyphicon glyphicon-eye-open">
@@ -15,35 +16,46 @@
             <p>{{item.stats.appreciations}}</p>
           </span>
           <span class="	glyphicon glyphicon-thumbs-up">
-            <p></p>{{item.stats.comments}}</p>
+            <p>{{item.stats.comments}}</p>
           </span>
         </div>
         <a :href='item.url' target='_blank'>
-          <button>View Gallery</button>
+          <button>View Project</button>
         </a>
       </div>
     </div>
 
     <div v-if='modal' class='project-modal'>
-      <h1>Projects</h1>
-      <button v-on:click='all'>All</button>
-      <button v-on:click='viewedMost'>Most viewed</button>
+      <div>
+        <h1>Projects</h1>
+      </div>
+      <div  class='project-filter--buttons'>
+        <p :class="{highlight:showallProject}" v-on:click='all'>All</p>
+        <p :class="{highlight:showfilteredProject}" v-on:click='viewedMost'>Popular</p>
+      </div>
       <div class='all-projects'>
         <div class='all-project' v-for='author1Project in author1Projects[0]'>
           <img v-bind:src='author1Project.covers[404]'></img>
-          <h2>{{author1Project.name}}</h2>
-          <p>{{author1Project.stats.views}}</p>
-          <p>{{author1Project.stats.appreciations}}</p>
-          <p>{{author1Project.stats.comments}}</p>
+          <h4>{{author1Project.name}}</h4>
+          <div class='over-stat'>
+            <span class="glyphicon glyphicon-eye-open">
+              <p>{{author1Project.stats.views}}</p>
+            </span>
+            <span class="glyphicon glyphicon-user">
+              <p>{{author1Project.stats.appreciations}}</p>
+            </span>
+            <span class="	glyphicon glyphicon-thumbs-up">
+              <p>{{author1Project.stats.comments}}</p>
+            </span>
+          </div>
           <a :href='author1Project.url' target='_blank'>
-            <button>View Gallery</button>
+            <button>View Project</button>
           </a>
         </div>
       </div>
-
     </div>
     <div>
-    <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
+      <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
     </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
     <div v-if='modal' v-on:click='closeModal()' class='overlay'>
@@ -60,6 +72,8 @@ export default {
     return {
       author1Projects: [],
       previewProjects: [],
+      showallProject: true,
+      showfilteredProject: false,
       preview: [],
       random: Number,
       projectSize: Number,
@@ -136,9 +150,13 @@ export default {
     },
     viewedMost: function() {
       this.source = 4000
+      this.showfilteredProject = true
+      this.showallProject = false
     },
     all: function() {
       this.source = 0
+      this.showallProject = true
+      this.showfilteredProject = false
     },
 
     updateSource: function(source) {
@@ -181,14 +199,22 @@ export default {
   width: 90%;
   height: auto;
   margin: 0 auto;
-  margin-top:4em;
-  border:0.1em solid maroon;
+  margin-top: 4em;
+  border: 0.1em solid #cccccc;
 }
-.contri h1{
-   width: 100%;
-  text-align: center;
-  margin-top: 1em;
-  padding:0.5em;
+
+.contri h1 {
+  width: 100%;
+  text-align: left;
+  margin: 1em 1em 1em 7em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
+  display: inline-block;
+}
+
+.contri h2 {
+  width: 100%;
+  text-align: right;
   font-family: 'Bree Serif', serif;
 }
 .projects {
@@ -199,35 +225,40 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
-.project{
-   width: 25%;
+
+.project {
+  width: 25%;
   height: 60%;
   float: left;
-  margin-left:6%;
-  border:0.1em solid green;
-  margin-bottom:3em;
-  box-shadow: 1px 3px grey;
+  margin-left: 6%;
+  border: 0.1em solid green;
+  margin-bottom: 3em;
+  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.45);
 }
-.projects h4{
+
+.projects h4 {
   width: 100%;
   text-align: center;
   margin-top: 1em;
-  padding:0.5em;
+  padding: 0.5em;
   font-family: 'Bree Serif', serif;
 }
+
 .projects img {
-  width: 100%;
+  width: 100.1%;
   height: 60%;
-  margin-top:-0.2em;
+  margin-top: -0.2em;
 }
-.projects button{
-  width:60%;
+
+.projects button {
+  width: 60%;
   font-size: 1.5em;
-  margin:1em 0 1em 0;
+  margin: 1em 0 1em 0;
   background-color: #003D3D;
-  color:white;
+  color: white;
   font-family: 'Merriweather', serif;
 }
+
 .overall-stat span {
   padding: 0.2em;
 }
@@ -236,7 +267,6 @@ export default {
   display: inline;
   margin-left: 0.5em;
   font-size: 1.2em;
-  width:30%;
 }
 
 .vuechart {
@@ -249,20 +279,20 @@ export default {
   width: 20vw;
   height: 5vh;
   text-align: center;
-  margin:0em 0em;
+  margin: 0em 0em;
   background-color: #785000;
-  color:white;
+  color: white;
   font-family: 'Bree Serif', serif;
   font-size: 1.25em;
 }
 
 .project-modal {
-  width: 80%;
+  width: 60%;
   height: 80%;
   overflow-y: scroll;
   position: fixed;
   top: 10%;
-  left: 10%;
+  left: 20%;
   z-index: 1;
   background-color: #fff;
   border-radius: 2px;
@@ -270,36 +300,90 @@ export default {
   transition: all .8s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
-
+.project-modal h1{
+width: 80%;
+  text-align: left;
+  margin: 1em 1em 1em 4.4em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
+} 
 .all-projects {
-  width: 100%;
+ width: 80%;
   height: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .all-project {
-  width: 33%;
-  height: auto;
-  margin: 0 auto;
+ width: 25%;
+  height: 60%;
+  float: left;
+  margin-left: 6%;
+  border: 0.1em solid green;
+  margin-bottom: 3em;
+  box-shadow: 1px 3px grey;
 }
-
-
-
-.all-project img {
+.all-project h4 {
   width: 100%;
-  height: auto;
-  padding: 2em;
+  text-align: center;
+  margin-top: 1em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
 }
 
+.project-filter--buttons{
+  position: absolute;
+  top:3.5em;
+  right:10.5em;
+}
+.project-filter--buttons p{
+ width:6vw;
+ display: inline-block;
+}
+.project-filter--buttons p:first-child{
+ border-right:0.1em solid black;
+}
+.all-project img {
+ width: 100%;
+  height: 60%;
+  margin-top: -0.2em;
+}
+.highlight {
+ color:#785000;
+ font-weight: bold;
+}
 .all-project p {
   margin-top: -1em;
   float: left;
   width: 23.3%;
   padding: 0 0 0 4em;
 }
+.over-stat {
+  width:90%;
+}
 
+.over-stat span {
+  width:30%;
+  padding: 0.2em;
+}
+
+.over-stat p {
+  display: inline;
+  /*margin-left: 0.5em;*/
+  /*font-size: 1.2em;*/
+}
+
+.all-project button {
+  width: 70%;
+  font-size: 1.5em;
+  margin: 1em 0 1em 0;
+  background-color: #003D3D;
+  color: white;
+  font-family: 'Merriweather', serif;
+}
 .overlay {
   width: 100%;
   height: 100%;
@@ -311,12 +395,12 @@ export default {
   display: table;
   transition: opacity .3s ease;
 }
-@media screen and (max-width:1400px){
-.project-img {
-  width: 40%;
-  height: 40%;
-  margin-top: 1.6em;
-}
-}
 
+@media screen and (max-width:1400px) {
+  .project-img {
+    width: 40%;
+    height: 40%;
+    margin-top: 1.6em;
+  }
+}
 </style>
