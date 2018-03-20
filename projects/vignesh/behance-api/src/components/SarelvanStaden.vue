@@ -2,7 +2,7 @@
   <div class='sarelProjects'>
     <div class='contri' v-for='author1Project in author1Projects'>
       <h1>Projects</h1>
-      <h2>Total contribution - {{projectSize}}</h2>
+      <h3>Total contribution - {{projectSize}}</h3>
     </div>
     <div class='projects'>
       <div class='project' v-for='item in previewdProjects'>
@@ -24,36 +24,37 @@
         </a>
       </div>
     </div>
-
-    <div v-if='modal' class='project-modal'>
-      <div>
-        <h1>Projects</h1>
-      </div>
-      <div  class='project-filter--buttons'>
-        <p :class="{highlight:showallProject}" v-on:click='all'>All</p>
-        <p :class="{highlight:showfilteredProject}" v-on:click='viewedMost'>Popular</p>
-      </div>
-      <div class='all-projects'>
-        <div class='all-project' v-for='author1Project in author1Projects[0]'>
-          <img v-bind:src='author1Project.covers[404]'></img>
-          <h4>{{author1Project.name}}</h4>
-          <div class='over-stat'>
-            <span class="glyphicon glyphicon-eye-open">
-              <p>{{author1Project.stats.views}}</p>
-            </span>
-            <span class="glyphicon glyphicon-user">
-              <p>{{author1Project.stats.appreciations}}</p>
-            </span>
-            <span class="	glyphicon glyphicon-thumbs-up">
-              <p>{{author1Project.stats.comments}}</p>
-            </span>
-          </div>
-          <a :href='author1Project.url' target='_blank'>
-            <button>View Project</button>
-          </a>
+    <transition name="modal">
+      <div v-if='modal' class='project-modal'>
+        <div>
+          <h1>Projects</h1>
         </div>
-      </div>
+        <div class='project-filter--buttons'>
+          <p :class="{highlight:showallProject}" v-on:click='all'>All</p>
+          <p :class="{highlight:showfilteredProject}" v-on:click='viewedMost'>Popular</p>
+        </div>
+        <div class='all-projects'>
+          <div class='all-project' v-for='author1Project in author1Projects[0]'>
+            <img v-bind:src='author1Project.covers[404]'></img>
+            <h4>{{author1Project.name}}</h4>
+            <div class='over-stat'>
+              <span class="glyphicon glyphicon-eye-open">
+                <p>{{author1Project.stats.views}}</p>
+              </span>
+              <span class="glyphicon glyphicon-user">
+                <p>{{author1Project.stats.appreciations}}</p>
+              </span>
+              <span class="	glyphicon glyphicon-thumbs-up">
+                <p>{{author1Project.stats.comments}}</p>
+              </span>
+            </div>
+            <a :href='author1Project.url' target='_blank'>
+              <button>View Project</button>
+            </a>
+          </div>
+        </div>
     </div>
+    </transition>
     <div>
       <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
     </div>
@@ -195,6 +196,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+button {
+  box-sizing: content-box;
+  border: none;
+}
+
 .sarelProjects {
   width: 90%;
   height: auto;
@@ -203,20 +209,23 @@ export default {
   border: 0.1em solid #cccccc;
 }
 
-.contri h1 {
+.contri {
   width: 100%;
-  text-align: left;
-  margin: 1em 1em 1em 7em;
+  display: flex;
+  justify-content: space-between;
   padding: 0.5em;
-  font-family: 'Bree Serif', serif;
-  display: inline-block;
 }
 
-.contri h2 {
-  width: 100%;
-  text-align: right;
+.contri h1 {
+  width: 38%;
   font-family: 'Bree Serif', serif;
 }
+
+.contri h3 {
+  width: 50%;
+  font-family: 'Bree Serif', serif;
+}
+
 .projects {
   width: 80%;
   height: auto;
@@ -233,7 +242,7 @@ export default {
   margin-left: 6%;
   border: 0.1em solid green;
   margin-bottom: 3em;
-  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.45);
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.45);
 }
 
 .projects h4 {
@@ -252,11 +261,23 @@ export default {
 
 .projects button {
   width: 60%;
+  border-radius: 8;
   font-size: 1.5em;
   margin: 1em 0 1em 0;
-  background-color: #003D3D;
-  color: white;
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+  padding: 8px;
   font-family: 'Merriweather', serif;
+}
+
+
+.projects button:hover {
+  background: #000000;
+  text-decoration: none;
+  color: white;
+  border: 2px solid #000000;
+  transition: 0.5s;
 }
 
 .overall-stat span {
@@ -300,15 +321,25 @@ export default {
   transition: all .8s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
-.project-modal h1{
-width: 80%;
+
+.project-modal h1 {
+  width: 80%;
   text-align: left;
   margin: 1em 1em 1em 4.4em;
   padding: 0.5em;
   font-family: 'Bree Serif', serif;
-} 
+}
+.modal-enter-active,
+.modal-leave-active { transition: opacity 450ms }
+
+.modal-enter,
+.modal-leave-to { opacity: 0 }
+
+.modal-leave,
+.modal-enter-to { opacity: 1 }
+
 .all-projects {
- width: 80%;
+  width: 80%;
   height: auto;
   margin: 0 auto;
   display: flex;
@@ -318,7 +349,7 @@ width: 80%;
 }
 
 .all-project {
- width: 25%;
+  width: 25%;
   height: 60%;
   float: left;
   margin-left: 6%;
@@ -326,6 +357,7 @@ width: 80%;
   margin-bottom: 3em;
   box-shadow: 1px 3px grey;
 }
+
 .all-project h4 {
   width: 100%;
   text-align: center;
@@ -334,39 +366,45 @@ width: 80%;
   font-family: 'Bree Serif', serif;
 }
 
-.project-filter--buttons{
+.project-filter--buttons {
   position: absolute;
-  top:3.5em;
-  right:10.5em;
+  top: 3.5em;
+  right: 10.5em;
 }
-.project-filter--buttons p{
- width:6vw;
- display: inline-block;
+
+.project-filter--buttons p {
+  width: 6vw;
+  display: inline-block;
 }
-.project-filter--buttons p:first-child{
- border-right:0.1em solid black;
+
+.project-filter--buttons p:first-child {
+  border-right: 0.1em solid black;
 }
+
 .all-project img {
- width: 100%;
+  width: 100%;
   height: 60%;
   margin-top: -0.2em;
 }
+
 .highlight {
- color:#785000;
- font-weight: bold;
+  color: #785000;
+  font-weight: bold;
 }
+
 .all-project p {
   margin-top: -1em;
   float: left;
   width: 23.3%;
   padding: 0 0 0 4em;
 }
+
 .over-stat {
-  width:90%;
+  width: 90%;
 }
 
 .over-stat span {
-  width:30%;
+  width: 30%;
   padding: 0.2em;
 }
 
@@ -378,12 +416,26 @@ width: 80%;
 
 .all-project button {
   width: 70%;
+  border-radius: 8;
   font-size: 1.5em;
   margin: 1em 0 1em 0;
-  background-color: #003D3D;
-  color: white;
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+  padding: 8px;
   font-family: 'Merriweather', serif;
 }
+
+
+
+.all-projects button:hover {
+  background: #000000;
+  text-decoration: none;
+  color: white;
+  border: 2px solid #000000;
+  transition: 0.5s;
+}
+
 .overlay {
   width: 100%;
   height: 100%;

@@ -3,7 +3,7 @@
     <div class='welcome-page'>
       <nav>
         <ul>
-          <li class='aboutnav' v-scroll-to="'.about p'">About</li>
+          <li class='aboutnav' v-scroll-to="'.about'">What we do</li>
           <li v-scroll-to="'.designers'">Designers</li>
         </ul>
       </nav>
@@ -22,101 +22,90 @@
       </div>
     </div>
     <div class='about'>
-      <h1>About</h1>
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-      <div class='about-field'>
-        <div class='about-webdesign'>
-          <img src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fgalway-website-design.png?1521411600870"></img>
-          <h2>Website design</h2>
-          <p>Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock</p>
-        </div>
-        <div class='about-graphicdesign'>
-          <img src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fgalway-website-design.png?1521411600870"></img>
-          <h2>Graphic design</h2>
-          <p>Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock</p>
-        </div>
-        <div class='about-photography'>
-          <img src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fgalway-website-design.png?1521411600870"></img>
-          <h2>Photography</h2>
-          <p>Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock</p>
-        </div>
+      <h1>What we do</h1>
+      <transition name="fade">
+      <div v-for="number in [currentNumber]">
+        <img   :src='images[Math.abs(currentNumber) % images.length]'/>
       </div>
+      </transition>
+      <p>
+        <a @click="prev">Previous</a> |
+        <a @click="next">Next</a>
+      </p>
     </div>
     <div class='designers-section'>
-      <h1 class='designers-heading'>Our designers</h1>
-      <div class='designers'>
-        <div v-for="(designer,index) in designers" class='designer' :class="{highlight:designer.name == selected}" id='profileimg' @click="selected = designer.name">
-          <img v-bind:src='designer.profile'>
-          <h3>{{designer.name}}</h3>
-          <p>{{designer.field}}</p>
-          <div class='overall-stat'>
-            <span class="glyphicon glyphicon-eye-open">
-              <p>{{designer.stats.views}}</p>
-            </span>
-            <span class="glyphicon glyphicon-user">
-              <p>{{designer.stats.followers}}</p>
-            </span>
-            <span class="	glyphicon glyphicon-thumbs-up">
-              <p>{{designer.stats.appreciations}}</p>
-            </span>
+          <h1 class='designers-heading'>Our designers</h1>
+          <div class='designers'>
+            <div v-for="(designer,index) in designers" class='designer' :class="{highlight:designer.name == selected}" @click="selected = designer.name">
+              <img v-bind:src='designer.profile'>
+              <h3>{{designer.name}}</h3>
+              <p>{{designer.field}}</p>
+              <div class='overall-stat'>
+                <span class="glyphicon glyphicon-eye-open">
+                  <p>{{designer.stats.views}}</p>
+                </span>
+                <span class="glyphicon glyphicon-user">
+                  <p>{{designer.stats.followers}}</p>
+                </span>
+                <span class="	glyphicon glyphicon-thumbs-up">
+                  <p>{{designer.stats.appreciations}}</p>
+                </span>
+              </div>
+              <div :class="{arrowdown:designer.name == selected}"></div>
+            </div>
           </div>
-          <div :class="{arrowdown:designer.name == selected}"></div>
-        </div>
-      </div>
 
-    </div>
+        </div>
     <NathanChambers v-if='author2Stats' />
     <SarelVanStaden v-if='author1Stats' />
     <ElenaGalitsky v-if='author3Stats' />
     <DannyCarlsen v-if='author4Stats' />
-    <div class='footer'>
-    
-      <div class='behance-profile'>
-        <div>
-          <h3>Behance profile</h3>
-        </div>
-        <div class='behance-profile--links'>
-          <a :href='designers[1].url' target='_blank'>
-            <p>Sarel VanStaden</p>
-          </a>
-          <a :href='designers[3].url' target='_blank'>
-            <p>Nathan Chambers</p>
-          </a>
-            <a :href='designers[0].url' target='_blank'>
-            <p>Elena Galitsky</p>
-          </a>
-          <a :href='designers[2].url' target='_blank'>
-            <p>Danny Carlsen</p>
-          </a>
-        </div>
 
-      </div>
-        <div class="address">
-        <div>
-          <h3>Contact</h3>
-        </div>
-        <div  class="mail">
-        <div>
-          <i class="glyphicon glyphicon-folder-open"></i>
-          <p>20,Wallstreet,Ohama</p>
-        </div>
-        <div>
-          <i class="phone glyphicon glyphicon-phone-alt"></i>
-          <p>0800-237-237</p>
-        </div>
-        </div>
-        <!--<div class="mail">
-              <i class="glyphicon glyphicon-envelope"></i>
-              <p>creater@base.com</p>
-            </div>-->
-      </div>
-    </div>
+    <!-- <div class='footer'>
+
+              <div class='behance-profile'>
+                <div>
+                  <h3>Behance profile</h3>
+                </div>
+                <div class='behance-profile--links'>
+                  <a :href='designers[1].url' target='_blank'>
+                    <p>Sarel VanStaden</p>
+                  </a>
+                  <a :href='designers[3].url' target='_blank'>
+                    <p>Nathan Chambers</p>
+                  </a>
+                  <a :href='designers[0].url' target='_blank'>
+                    <p>Elena Galitsky</p>
+                  </a>
+                  <a :href='designers[2].url' target='_blank'>
+                    <p>Danny Carlsen</p>
+                  </a>
+                </div>
+
+              </div>
+              <div class="address">
+                <div>
+                  <h3>Contact</h3>
+                </div>
+                <div class="mail">
+                  <div>
+                    <i class="glyphicon glyphicon-folder-open"></i>
+                    <p>20,Wallstreet,Ohama</p>
+                  </div>
+                  <div>
+                    <i class="phone glyphicon glyphicon-phone-alt"></i>
+                    <p>0800-237-237</p>
+                  </div>
+                </div>
+              </div>
+            </div> -->
   </div>
   </div>
   <!--API=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c-->
 </template>
 
 <script>
+
 import Parallax from './Parallax'
 import SarelVanStaden from './SarelvanStaden'
 import NathanChambers from './Nathan Chambers'
@@ -143,9 +132,16 @@ export default {
       author1Stats: false,
       author2Stats: false,
       author3Stats: false,
-      author4Stats: false
+      author4Stats: false,
+      images: [
+       'https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2F140416164143-saudi-freedom-tower-cloud-view-super-169.jpg?1510504849378',
+        'https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fsaturn-with-rings-in-space-zoom-into-beautiful-planet-on-black-background-with-stars-and-sun-in-distance_ekv0blbxe__F0000.png?1519896515509',
+        'https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2F140416164143-saudi-freedom-tower-cloud-view-super-169.jpg?1510504849378'],
+      currentNumber: 0,
+      slide:true
     }
   },
+ 
   components: {
     SarelVanStaden,
     DannyCarlsen,
@@ -173,6 +169,13 @@ export default {
     mouseOver: function() {
       this.profilehover = !this.profilehover
 
+    },
+    next: function() {
+      this.currentNumber += 1
+      this.slide = true
+    },
+    prev: function() {
+      this.currentNumber -= 1
     }
   },
   mounted() {
@@ -278,6 +281,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+button {
+  box-sizing: content-box;
+  border: none;
+}
+
 .home {
   width: 100%;
   height: 100%;
@@ -327,7 +335,7 @@ nav {
 .logo-landingpage {
   width: 8vw;
   height: 6vw;
-  margin-bottom:-1em;
+  margin-bottom: -1em;
 }
 
 .welcome-page {
@@ -349,13 +357,11 @@ nav {
   margin-top: -5.5em;
   z-index: 1111;
 }
-.welcome-page-details h1{
-  margin-bottom:1em;
 
-}
+
 .about {
   width: 80%;
-  height: auto;
+  height: 80%;
   margin: 0 auto;
   margin-top: 4vh;
   padding-bottom: 2.25em;
@@ -367,53 +373,19 @@ nav {
   font-size: 3em;
 }
 
-.about p {
-  width: 90%;
-  height: auto;
-  letter-spacing: 0.05em;
-  line-height: 1.6em;
-  font-family: 'Merriweather', serif;
-  margin: 0 auto;
-  font-size: 24px;
-  color: #003D3D;
-  margin-top: 1.6em;
+.about img {
+  width: 40vw;
 }
 
-.about-field {
-  margin-top: 3em;
+.fade-enter-active, .fade-leave-active {
+  transition: all 1s;
 }
-
-.about-webdesign,
-.about-graphicdesign,
-.about-photography {
-  width: 20vw;
-  height: auto;
-  display: inline-block;
-  border: 0.1em solid green;
-  padding: 1em;
-  margin: 0em 1em;
+.fade-enter, .fade-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
-
-.about-field h2 {
-  font-family: 'Bree Serif', serif;
-  font-size: 2em;
-}
-
-.about-webdesign img,
-.about-graphicdesign img,
-.about-photography img {
-  width: 30%;
-  height: 30%;
-}
-
-.about-webdesign p,
-.about-graphicdesign p,
-.about-photography p {
-  font-size: 20px;
-}
-
 .overall-stat {
-  background-color: rgba(255, 242, 207, 0.5);
+  background-color: rgba(255, 242, 207, 0.4);
 }
 
 .overall-stat span {
@@ -455,11 +427,21 @@ nav {
 
 .welcome-page-details button {
   font-size: 2em;
-  height: 25%;
-  color: black;
-  background-color: white;
+  height: 20%;
+  border-radius: 8;
+  color: white;
+  background-color: rgba(120, 80, 0, 0.7);
   font-family: Georgia, 'Times New Roman', Times, serif;
   z-index: 1111;
+  text-decoration: none;
+  padding: 14px;
+}
+
+.welcome-page-details button:hover {
+  background: rgba(120, 80, 0, 1);
+  text-decoration: none;
+  color: black;
+  transition: 0.5s;
 }
 
 .welcome-img1 {
@@ -499,7 +481,7 @@ nav {
 }
 
 .designer {
-  background-color: rgba(255, 242, 207, 0.5);
+  background-color: rgba(255, 242, 207, 0.4);
 }
 
 .designers img {
@@ -523,7 +505,7 @@ nav {
   margin-top: -1.5em;
   padding: 0.5em;
   font-family: 'Bree Serif', serif;
-  font-weight:normal;
+  font-weight: normal;
 }
 
 @keyframes bounce {
@@ -541,9 +523,9 @@ nav {
 .footer {
   width: 100%;
   display: flex;
-  height: 10vh;
+  height: 12vh;
   margin-top: 2em;
-  background-color: #003D3D;
+  background-color: #000000;
   color: white;
 }
 
@@ -557,19 +539,20 @@ nav {
   flex-direction: column;
   padding: 0em 0 0 15em;
 }
-.address h3{
+
+.address h3 {
   text-align: left;
-  padding-bottom:0.5em;
+  padding-bottom: 0.5em;
 }
+
 .mail {
-   display: flex;
+  display: flex;
   flex-direction: row;
-  width:60%;
-justify-content:space-between;
+  width: 60%;
+  justify-content: space-between;
   height: 3em;
   font-size: 1.25em;
   color: white;
-  
 }
 
 .mail p {
@@ -588,13 +571,16 @@ justify-content:space-between;
   text-align: left;
   padding: 0em 0 0 15em;
 }
-.behance-profile a{
+
+.behance-profile a {
   width: 50%;
 }
-.behance-profile h3{
+
+.behance-profile h3 {
   text-align: left;
-  padding-bottom:0.5em;
+  padding-bottom: 0.5em;
 }
+
 .behance-profile--links {
   display: flex;
   flex-direction: row;
@@ -602,7 +588,42 @@ justify-content:space-between;
   width: 100%;
   height: auto;
 }
-.behance-profile p{
+
+.behance-profile p {
   font-size: 1em;
+}
+
+@media screen and (max-width:1400px) {
+
+
+  .designers-section h1 {
+    font-family: 'Bree Serif', serif;
+    font-size: 2.75em;
+    padding-bottom: 1em;
+  }
+
+  .designer {
+    width: 18vw;
+  }
+  .overall-stat {
+    margin-top: -1em;
+  }
+
+  .highlight {
+    outline: 8px solid #42b983;
+    outline-offset: 10px;
+    padding-bottom: 15px;
+  }
+  .arrowdown {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #42b983;
+    bottom: -2.5em;
+    right: 7.5em;
+  }
+
+  .overall-stat p {
+    font-size: 1em;
+  }
 }
 </style>
