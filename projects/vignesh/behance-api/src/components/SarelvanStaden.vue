@@ -321,7 +321,17 @@ button {
   transition: all .8s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
-
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, .7);
+  display: table;
+  transition: opacity .3s ease;
+}
 .project-modal h1 {
   width: 80%;
   text-align: left;
@@ -330,7 +340,7 @@ button {
   font-family: 'Bree Serif', serif;
 }
 .modal-enter-active,
-.modal-leave-active { transition: opacity 450ms }
+.modal-leave-active { transition: opacity 1s }
 
 .modal-enter,
 .modal-leave-to { opacity: 0 }
@@ -436,17 +446,7 @@ button {
   transition: 0.5s;
 }
 
-.overlay {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  background-color: rgba(0, 0, 0, .7);
-  display: table;
-  transition: opacity .3s ease;
-}
+
 
 @media screen and (max-width:1400px) {
   .project-img {

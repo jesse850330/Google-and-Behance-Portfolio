@@ -23,11 +23,11 @@
     </div>
     <div class='about'>
       <h1>What we do</h1>
-      <transition name="fade">
-      <div v-for="number in [currentNumber]">
+      <transition-group name="fade">
+      <div v-for="number in [currentNumber]" v-bind:key="number">
         <img   :src='images[Math.abs(currentNumber) % images.length]'/>
       </div>
-      </transition>
+      </transition-group>
       <p>
         <a @click="prev">Previous</a> |
         <a @click="next">Next</a>
@@ -56,11 +56,12 @@
           </div>
 
         </div>
+    <transition name="modal">
     <NathanChambers v-if='author2Stats' />
     <SarelVanStaden v-if='author1Stats' />
     <ElenaGalitsky v-if='author3Stats' />
     <DannyCarlsen v-if='author4Stats' />
-
+    </transition>
     <!-- <div class='footer'>
 
               <div class='behance-profile'>
@@ -136,7 +137,7 @@ export default {
       images: [
        'https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2F140416164143-saudi-freedom-tower-cloud-view-super-169.jpg?1510504849378',
         'https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fsaturn-with-rings-in-space-zoom-into-beautiful-planet-on-black-background-with-stars-and-sun-in-distance_ekv0blbxe__F0000.png?1519896515509',
-        'https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2F140416164143-saudi-freedom-tower-cloud-view-super-169.jpg?1510504849378'],
+        'https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fpoint-reyes-shipwreck.jpg?1510501821068'],
       currentNumber: 0,
       slide:true
     }
@@ -375,14 +376,19 @@ nav {
 
 .about img {
   width: 40vw;
+  height:30vw;
+  display: inline-block;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: all 1s;
+
+.fade-enter-active {
+  transition: all 0.8s ease;
+  overflow: hidden;
 }
-.fade-enter, .fade-leave-to /* .list-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave {
   opacity: 0;
-  transform: translateY(30px);
+   position: absolute;
+  z-index: 0;
 }
 .overall-stat {
   background-color: rgba(255, 242, 207, 0.4);
