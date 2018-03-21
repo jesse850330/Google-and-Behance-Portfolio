@@ -12,7 +12,7 @@
     <nav v-bind:class="{ active : (scrollPosition >= 700)}">
       <img v-scroll-to="'.home'" class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2FW%20JOV%20logo.png?1520054601329"></img>
       <ul>
-        <li v-bind:class="{ jactive : (scrollPosition >= position*1 && scrollPosition <= position * 2) && jactivenav}" class='jessenav' v-scroll-to="'.jesse'">Jesse</li>
+        <li v-bind:class="{ jactive : (scrollPosition >= position*0.9 && scrollPosition <= position * 2) && jactivenav}" class='jessenav' v-scroll-to="'.jesse'">Jesse</li>
         <li v-bind:class="{ oactive : (scrollPosition >= position * 2 && scrollPosition <= position *3) && oactivenav}" class='olivernav' v-scroll-to="'.oliver'">Oliver</li>
         <li v-bind:class="{ vactive : (scrollPosition >= position *3) && vactivenav}" class='vigneshnav' v-scroll-to="'.vignesh'">Vignesh</li>
       </ul>
@@ -95,15 +95,15 @@ h2 {
 }
 
 .jactive {
-  color: #00D9FF;
+  color: #E89605;
 }
 
 .oactive {
-  color: #000000;
+  color: #E89605;
 }
 
 .vactive {
-  color: rgba(213, 166, 217, 0.5);
+  color: #E89605;
 }
 
 .jessenav {
@@ -125,7 +125,7 @@ nav ul li {
   margin-bottom: 2vh;
   font-size: 1.75em;
   color: white;
-  line-height: 50px;
+  line-height: 85px;
   display: inline;
   margin-right: 3vw;
   font-family: 'Bree Serif', serif;

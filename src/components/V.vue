@@ -16,13 +16,12 @@
         </div>
         <h1>Project detail</h1>
         <p>Main purpose of this single page site is to showcase our designers projects. I've done Ux design processes to make website pleasing to eye and for great user experience. I've used Vue framework and Data viz to showcase overall statistics of designer's projects such as likes, comments, & appreciations.</p>
-     <button class='vigneshHome'>
-      <router-link v-bind:to="'/vigneshHome'">VIEW THE PROJECT</router-link>
-    </button>
+        <button class='vigneshHome'>
+          <router-link v-bind:to="'/vigneshHome'">VIEW THE PROJECT</router-link>
+        </button>
       </div>
-      
+
     </div>
-    <!--<iframe width='1200px' height='500px' src='./vigneshHome'></iframe>-->
   </div>
 </template>
 
@@ -56,20 +55,22 @@ h2 {
   text-decoration: none;
   display: inline-block;
   font-size: 2em;
-  padding:0.8em;
-  margin-top:1em;
+  padding: 0.8em;
+  margin-top: 1em;
 }
-a{
-    text-decoration: none;
+
+a {
+  text-decoration: none;
 }
+
 * {
-  color: white;
+  color: black;
 }
 
 .vignesh {
   height: 93vh;
   width: 100%;
-  background-color: rgba(213, 166, 217, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   margin-top: 10vh;
 }
 
@@ -91,7 +92,8 @@ a{
 
 .project-details p {
   width: 50vw;
-font-family: 'Merriweather', serif;  text-align: left;
+  font-family: 'Merriweather', serif;
+  text-align: left;
   font-size: 1.5em;
   line-height: 1.4;
 }
@@ -127,7 +129,6 @@ font-family: 'Merriweather', serif;  text-align: left;
 
 .name h1::first-letter {
   font-size: 200%;
-  color: white;
 }
 
 
@@ -136,7 +137,7 @@ font-family: 'Merriweather', serif;  text-align: left;
 .project-title h1 {
   margin-top: 2vh;
   font-size: 3em;
-text-align: center;
+  text-align: center;
 }
 
 ul {

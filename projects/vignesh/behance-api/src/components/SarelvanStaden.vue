@@ -1,4 +1,4 @@
-<template>
+<template v-scroll-to="'.contri'">
   <div class='sarelProjects'>
     <div class='contri' v-for='author1Project in author1Projects'>
       <h1>Projects</h1>
@@ -76,6 +76,7 @@ export default {
       showallProject: true,
       showfilteredProject: false,
       preview: [],
+      categories:[],
       random: Number,
       projectSize: Number,
       modal: false,
@@ -181,6 +182,7 @@ export default {
       this.random = Math.floor((Math.random() * (this.projectSize - 6)) + 1);
       for (var i = this.random; i <= (this.random + 5); i++) {
         this.preview.push(this.previewProjects[0][i])
+        this.categories.push(this.previewProjects[0][i].name)
       }
       return this.preview
     }
