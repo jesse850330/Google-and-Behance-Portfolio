@@ -13,8 +13,8 @@
       <img v-scroll-to="'.home'" class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2FW%20JOV%20logo.png?1520054601329"></img>
       <ul>
         <li v-bind:class="{ jactive : (scrollPosition >= position*0.9 && scrollPosition <= position * 1.8) && jactivenav}" class='jessenav' v-scroll-to="'.jesse'">Jesse</li>
-        <li v-bind:class="{ oactive : (scrollPosition >= position * 1.8 && scrollPosition <= position *2.8) && oactivenav}" class='olivernav' v-scroll-to="'.oliver'">Oliver</li>
-        <li v-bind:class="{ vactive : (scrollPosition >= position *2.8) && vactivenav}" class='vigneshnav' v-scroll-to="'.vignesh'">Vignesh</li>
+        <li v-bind:class="{ oactive : (scrollPosition >= position * 1.8 && scrollPosition <= position *2.6) && oactivenav}" class='olivernav' v-scroll-to="'.oliver'">Oliver</li>
+        <li v-bind:class="{ vactive : (scrollPosition >= position *2.6) && vactivenav}" class='vigneshnav' v-scroll-to="'.vignesh'">Vignesh</li>
       </ul>
     </nav>
     <div>
@@ -51,7 +51,15 @@ export default {
     scrollHigh: function() {
       this.scrollPosition = window.scrollY
       this.position = window.innerHeight
+    
     }
+  },
+  updated(){
+if(this.scrollPosition >= 10){
+  this.vactivenav = true
+  this.jactivenav = true
+  this.oactivenav = true
+}
   },
   mounted() {
     window.addEventListener('scroll', this.scrollHigh)
@@ -59,9 +67,9 @@ export default {
   data() {
     return {
       scrollPosition: null,
-      jactivenav: true,
-      oactivenav: true,
-      vactivenav: true,
+      jactivenav: false,
+      oactivenav:false,
+      vactivenav: false,
       position: null
     }
   }

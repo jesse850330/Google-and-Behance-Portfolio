@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <!-- Welcome page -->
     <div class='welcome-page'>
       <nav>
         <ul>
@@ -21,9 +22,11 @@
         </div>
       </div>
     </div>
+
     <div class='about'>
       <h1>What we do</h1>
       <div class='about-details'>
+    <!-- Applying tansition group on about slider -->
         <transition-group name="fade">
           <div class='about-slider' v-for="number in [currentNumber]" v-bind:key="number">
             <img :src='images[Math.abs(currentNumber) % images.length]' />
@@ -62,7 +65,6 @@
           <div :class="{arrowdown:designer.name == selected}"></div>
         </div>
       </div>
-
     </div>
     <transition name="modal">
       <NathanChambers v-if='author2Stats' />
@@ -70,47 +72,8 @@
       <ElenaGalitsky v-if='author3Stats' />
       <DannyCarlsen v-if='author4Stats' />
     </transition>
-    <!-- <div class='footer'>
-
-                      <div class='behance-profile'>
-                        <div>
-                          <h3>Behance profile</h3>
-                        </div>
-                        <div class='behance-profile--links'>
-                          <a :href='designers[1].url' target='_blank'>
-                            <p>Sarel VanStaden</p>
-                          </a>
-                          <a :href='designers[3].url' target='_blank'>
-                            <p>Nathan Chambers</p>
-                          </a>
-                          <a :href='designers[0].url' target='_blank'>
-                            <p>Elena Galitsky</p>
-                          </a>
-                          <a :href='designers[2].url' target='_blank'>
-                            <p>Danny Carlsen</p>
-                          </a>
-                        </div>
-
-                      </div>
-                      <div class="address">
-                        <div>
-                          <h3>Contact</h3>
-                        </div>
-                        <div class="mail">
-                          <div>
-                            <i class="glyphicon glyphicon-folder-open"></i>
-                            <p>20,Wallstreet,Ohama</p>
-                          </div>
-                          <div>
-                            <i class="phone glyphicon glyphicon-phone-alt"></i>
-                            <p>0800-237-237</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
   </div>
   </div>
-  <!--API=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c-->
 </template>
 
 <script>
@@ -178,7 +141,6 @@ export default {
   methods: {
     addCoverimage: function(data) {
       this.sarelVanProjects = data
-      // console.log(this.image)
 
     },
     toggle: function(clicked) {
@@ -236,6 +198,7 @@ export default {
 
   },
   created() {
+    /*Time out for requesting API*/
     function withTimeout(msecs, promise) {
       const timeout = new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -571,7 +534,7 @@ nav {
   width: 100%;
   height: auto;
   margin: 0 auto;
-  margin: 3em 0 7em 0;
+  margin: 3em 0 4em 0;
   cursor: pointer;
 }
 

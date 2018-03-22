@@ -208,7 +208,6 @@ button {
   height: auto;
   margin: 0 auto;
   margin-top: 4em;
-  border: 0.1em solid #cccccc;
 }
 
 .contri {
