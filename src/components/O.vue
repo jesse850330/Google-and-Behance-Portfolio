@@ -1,27 +1,27 @@
 <template>
   <div class='oliver'>
     <div class="o">
-
       <div class='name'>
-        <div>
-          <h1>Oliver Faatili</h1>
-        </div>
-      </div>
-
-      <div class='project-details'>
-        <div class="positioning">
-          <h1>Project detail</h1>
-          <h2>Project detail</h2>
-          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <iframe class="iframe" src="'/oliverHome'"></iframe>
-        </div>
+        <h1>Oliver Faatili</h1>
       </div>
 
     </div>
+    <div class='project-details'>
+      <div>
+        <img src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2F6c08b3_e8b0ab79984a4bb1bd4228b21d982790_mv2_d_2072_2072_s_2.png?1520144682471">
+      </div>
+      <div>
+        <div class='project-title'>
+          <h1>Behance API & Data Viz</h1>
+        </div>
+        <h1>Project detail</h1>
+        <p>Main purpose of this single page site is to showcase our designers projects. I've done Ux design processes to make website pleasing to eye and for great user experience. I've used Vue framework and Data viz to showcase overall statistics of designer's projects such as likes, comments, & appreciations.</p>
+        <button class='oliverHome'>
+          <router-link v-bind:to="'/oliverHome'">VIEW THE PROJECT</router-link>
+        </button>
+      </div>
 
-    <button class='oliverHome'>
-      <router-link v-bind:to="'/oliverHome'">View Staff Portfolio's</router-link>
-    </button>
+    </div>
   </div>
 </template>
 
@@ -49,24 +49,25 @@ h2 {
   color: black;
 }
 
-.iframe {
-  width: 1400px;
-  height: 400px;
-  pointer-events: none
+a {
+  text-decoration: none;
 }
-
 .oliverHome {
-  border-radius: 12px;
-  padding: 20px 30px;
+height: auto;
+  width: auto;
   background-color: black;
+  border: none;
+  color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 2em;
+  padding: 0.8em;
+  margin-top: 1em;
 }
 
 .oliver {
-  height: 100vh;
+height: 80vh;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.8);
   margin-top: 10vh;
@@ -81,30 +82,12 @@ h2 {
 }
 
 .project-details {
-  width: 100%;
+  width: 80vw;
   display: flex;
   margin: 0 auto;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  margin-top: 3vh;
 }
-
-.project-details h2 {
-  font-family: 'Bree Serif', serif;
-  text-align: left;
-  font-size: 30px;
-}
-
-
-.name h1 {
-  padding-top: 30px;
-  height: auto;
-  margin-top: 20px;
-  text-align: center;
-  font-size: 40px;
-  font-family: 'Yrsa', serif;
-
-}
-
 
 .project-details p {
   width: 50vw;
@@ -114,12 +97,59 @@ h2 {
   line-height: 1.4;
 }
 
+.project-details h1 {
+  width: 50vw;
+  height: 1em;
+  font-family: 'Bree Serif', serif;
+  text-align: left;
+  font-size: 2em;
+  margin-top: 5vh;
+}
+
+.project-details img {
+  width: 30vw;
+  height: auto;
+  margin-top: 4vh;
+  padding-right: 4vw;
+}
+
+.project-title img {
+  width: 10vw;
+  height: 10vh;
+  margin-top: -2vh;
+}
+
+.name h1 {
+  height: auto;
+  margin-top: 2vh;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.name h1::first-letter {
+  font-size: 200%;
+}
 
 
 
 
+.project-title h1 {
+  margin-top: 2vh;
+  font-size: 3em;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
 
 a {
-  color: white;
+  color: #42b983;
 }
 </style>

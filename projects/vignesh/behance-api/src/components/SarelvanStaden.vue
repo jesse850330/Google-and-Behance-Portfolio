@@ -1,4 +1,4 @@
-<template>
+<template v-scroll-to="'.contri'">
   <div class='sarelProjects'>
     <div class='contri' v-for='author1Project in author1Projects'>
       <h1>Projects</h1>
@@ -76,6 +76,7 @@ export default {
       showallProject: true,
       showfilteredProject: false,
       preview: [],
+      categories:[],
       random: Number,
       projectSize: Number,
       modal: false,
@@ -181,6 +182,7 @@ export default {
       this.random = Math.floor((Math.random() * (this.projectSize - 6)) + 1);
       for (var i = this.random; i <= (this.random + 5); i++) {
         this.preview.push(this.previewProjects[0][i])
+        this.categories.push(this.previewProjects[0][i].name)
       }
       return this.preview
     }
@@ -213,11 +215,12 @@ button {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0.5em;
+  padding: 1em;
 }
 
 .contri h1 {
-  width: 38%;
+  width: 35%;
+  font-size:2em;
   font-family: 'Bree Serif', serif;
 }
 
@@ -242,7 +245,7 @@ button {
   margin-left: 6%;
   border: 0.1em solid green;
   margin-bottom: 3em;
-  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.45);
+  box-shadow: 0.1px 0.1px 2px 0px rgba(0, 0, 0, 0.45);
 }
 
 .projects h4 {
@@ -300,13 +303,18 @@ button {
   width: 20vw;
   height: 5vh;
   text-align: center;
-  margin: 0em 0em;
+  margin: 0em 0em 1em 0;
   background-color: #785000;
   color: white;
   font-family: 'Bree Serif', serif;
   font-size: 1.25em;
 }
-
+.all-projects-button:hover {
+    background: rgba(120, 80, 0, 1);
+  text-decoration: none;
+  color: black;
+  transition: 0.5s;
+}
 .project-modal {
   width: 60%;
   height: 80%;
@@ -317,11 +325,20 @@ button {
   z-index: 1;
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .8s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
-
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, .7);
+  display: table;
+  transition: opacity .3s ease;
+}
 .project-modal h1 {
   width: 80%;
   text-align: left;
@@ -330,7 +347,7 @@ button {
   font-family: 'Bree Serif', serif;
 }
 .modal-enter-active,
-.modal-leave-active { transition: opacity 450ms }
+.modal-leave-active { transition: opacity 0.5s }
 
 .modal-enter,
 .modal-leave-to { opacity: 0 }
@@ -355,7 +372,7 @@ button {
   margin-left: 6%;
   border: 0.1em solid green;
   margin-bottom: 3em;
-  box-shadow: 1px 3px grey;
+  
 }
 
 .all-project h4 {
@@ -436,17 +453,7 @@ button {
   transition: 0.5s;
 }
 
-.overlay {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  background-color: rgba(0, 0, 0, .7);
-  display: table;
-  transition: opacity .3s ease;
-}
+
 
 @media screen and (max-width:1400px) {
   .project-img {
