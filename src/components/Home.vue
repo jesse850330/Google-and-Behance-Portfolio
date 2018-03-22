@@ -12,9 +12,9 @@
     <nav v-bind:class="{ active : (scrollPosition >= 700)}">
       <img v-scroll-to="'.home'" class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2FW%20JOV%20logo.png?1520054601329"></img>
       <ul>
-        <li v-bind:class="{ jactive : (scrollPosition >= position*0.9 && scrollPosition <= position * 2) && jactivenav}" class='jessenav' v-scroll-to="'.jesse'">Jesse</li>
-        <li v-bind:class="{ oactive : (scrollPosition >= position * 2 && scrollPosition <= position *3) && oactivenav}" class='olivernav' v-scroll-to="'.oliver'">Oliver</li>
-        <li v-bind:class="{ vactive : (scrollPosition >= position *3) && vactivenav}" class='vigneshnav' v-scroll-to="'.vignesh'">Vignesh</li>
+        <li v-bind:class="{ jactive : (scrollPosition >= position*0.9 && scrollPosition <= position * 1.8) && jactivenav}" class='jessenav' v-scroll-to="'.jesse'">Jesse</li>
+        <li v-bind:class="{ oactive : (scrollPosition >= position * 1.8 && scrollPosition <= position *2.8) && oactivenav}" class='olivernav' v-scroll-to="'.oliver'">Oliver</li>
+        <li v-bind:class="{ vactive : (scrollPosition >= position *2.8) && vactivenav}" class='vigneshnav' v-scroll-to="'.vignesh'">Vignesh</li>
       </ul>
     </nav>
     <div>
@@ -149,9 +149,9 @@ nav {
 
 .logo-landingpage {
   width: auto;
-  height: 90px;
+  height: 80px;
   position: absolute;
-  /* top: 2em; */
+   top: 0.8em; 
   left: 2em;
 }
 

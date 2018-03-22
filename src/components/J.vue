@@ -68,7 +68,7 @@ h2 {
   color: black;
 }
 .jesse {
- height: 100vh;
+ height: 80vh;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.8);
   margin-top: 10vh;
