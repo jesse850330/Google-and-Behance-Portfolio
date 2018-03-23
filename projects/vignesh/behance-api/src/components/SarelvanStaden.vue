@@ -38,22 +38,19 @@
             <img v-bind:src='author1Project.covers[404]'></img>
             <h4>{{author1Project.name}}</h4>
             <div class='over-stat'>
-              <span class="glyphicon glyphicon-eye-open">
-                <p>{{author1Project.stats.views}}</p>
-              </span>
-              <span class="glyphicon glyphicon-user">
-                <p>{{author1Project.stats.appreciations}}</p>
-              </span>
-              <span class="	glyphicon glyphicon-thumbs-up">
-                <p>{{author1Project.stats.comments}}</p>
-              </span>
+                <span class="glyphicon glyphicon-eye-open"><p>{{author1Project.stats.views}}</p></span>
+                
+                <span class="glyphicon glyphicon-user"><p>{{author1Project.stats.appreciations}}</p></span>
+                
+                <span class="	glyphicon glyphicon-thumbs-up">  <p>{{author1Project.stats.comments}}</p></span>
+               
             </div>
             <a :href='author1Project.url' target='_blank'>
               <button>View Project</button>
             </a>
           </div>
         </div>
-    </div>
+      </div>
     </transition>
     <div>
       <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
@@ -76,7 +73,7 @@ export default {
       showallProject: true,
       showfilteredProject: false,
       preview: [],
-      categories:[],
+      categories: [],
       random: Number,
       projectSize: Number,
       modal: false,
@@ -219,12 +216,12 @@ button {
 
 .contri h1 {
   width: 35%;
-  font-size:2em;
+  font-size: 2em;
   font-family: 'Bree Serif', serif;
 }
 
 .contri h3 {
-  width: 50%;
+  width: 42%;
   font-family: 'Bree Serif', serif;
 }
 
@@ -308,25 +305,28 @@ button {
   font-family: 'Bree Serif', serif;
   font-size: 1.25em;
 }
+
 .all-projects-button:hover {
-    background: rgba(120, 80, 0, 1);
+  background: rgba(120, 80, 0, 1);
   text-decoration: none;
   color: black;
   transition: 0.5s;
 }
+
 .project-modal {
-  width: 60%;
+  width: 80%;
   height: 80%;
   overflow-y: scroll;
   position: fixed;
   top: 10%;
-  left: 20%;
+  left: 10%;
   z-index: 1;
   background-color: #fff;
   border-radius: 2px;
   transition: all .8s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
+
 .overlay {
   width: 100%;
   height: 100%;
@@ -338,21 +338,29 @@ button {
   display: table;
   transition: opacity .3s ease;
 }
+
 .project-modal h1 {
   width: 80%;
   text-align: left;
-  margin: 1em 1em 1em 4.4em;
+  margin: 1em 1em 1em 5.4em;
   padding: 0.5em;
   font-family: 'Bree Serif', serif;
 }
+
 .modal-enter-active,
-.modal-leave-active { transition: opacity 0.5s }
+.modal-leave-active {
+  transition: opacity 0.5s
+}
 
 .modal-enter,
-.modal-leave-to { opacity: 0 }
+.modal-leave-to {
+  opacity: 0
+}
 
 .modal-leave,
-.modal-enter-to { opacity: 1 }
+.modal-enter-to {
+  opacity: 1
+}
 
 .all-projects {
   width: 80%;
@@ -371,7 +379,6 @@ button {
   margin-left: 6%;
   border: 0.1em solid green;
   margin-bottom: 3em;
-  
 }
 
 .all-project h4 {
@@ -415,19 +422,20 @@ button {
   padding: 0 0 0 4em;
 }
 
-.over-stat {
-  width: 90%;
-}
 
-.over-stat span {
-  width: 30%;
-  padding: 0.2em;
-}
+.over-stat span{
+width:20%;
 
-.over-stat p {
+}
+.over-stat p{
+display: inline;
+margin-left:-0.6em;
+
+}
+.all projects .over-stat p {
   display: inline;
-  /*margin-left: 0.5em;*/
-  /*font-size: 1.2em;*/
+  margin-left: 0.5em;
+  font-size: 1.2em;
 }
 
 .all-project button {
@@ -460,5 +468,99 @@ button {
     height: 40%;
     margin-top: 1.6em;
   }
+  .contri h1 {
+    width: 37%;
+    font-size: 2em;
+  }
+
+  .contri h3 {
+    width: 46%;
+  }
+  .project-modal {
+    width: 70%;
+    height: 80%;
+    top: 10%;
+    left: 15%;
+  }
+
+  .project-modal h1 {
+    width: 80%;
+    text-align: left;
+    margin: 1em 1em 1em 4.4em;
+    padding: 0.5em;
+  }
+  .all-project h4 {
+    font-size: 1.25em;
+  }
+
+  .over-stat span{
+width:25%;
+
+}
+.over-stat p{
+display: inline;
+margin-left:-1.6em;
+
+}
+}
+@media screen and (max-width:1000px) {
+ .contri h1 {
+    width: 37%;
+    font-size: 1.75em;
+  }
+
+  .contri h3 {
+    width: 47%;
+    font-size: 1.25em;
+  }
+.project {
+  width: 28%;
+  margin-left: 4%;
+}
+.projects h4 {
+  margin-top: 0.75em;
+  font-size:1em;
+}
+
+.projects button {
+  font-size: 1.25em;
+  padding: 6px;
+}
+
+
+.glyphicon{
+  font-size: 0.8em;
+}
+.all-projects-button {
+  width: 17vw;
+  height: 4.5vh;
+  font-size: 1em;
+}
+
+  .project-modal h1 {
+    margin: 1em 1em 1em 4em;
+    font-size: 1.5em;
+  }
+  .all-project h4 {
+    font-size: 1em;
+  }
+.project-filter--buttons {
+  right: 7em;
+}
+.over-stat{
+  margin-left:-1em;
+}
+  .over-stat span{
+width:25%;
+
+}
+.over-stat p{
+margin-left:-1.6em;
+
+}
+.all-project button {
+  width: 60%;
+  font-size: 1em;
+}
 }
 </style>
