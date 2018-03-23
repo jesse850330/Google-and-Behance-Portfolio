@@ -171,7 +171,7 @@ nav {
   width: 60vw;
   height: auto;
   position: absolute;
-  top: 32vh;
+  top: 40vh;
   right: 20vw;
   color: #D6932E;
 }
