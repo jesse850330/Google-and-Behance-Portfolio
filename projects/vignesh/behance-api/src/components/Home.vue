@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <!-- Welcome page -->
     <div class='welcome-page'>
       <nav>
         <ul>
@@ -8,7 +9,7 @@
         </ul>
       </nav>
       <div class='welcome-page-details'>
-        <img class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Flogo1.png?1521674560976"></img>
+        <img class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Flogo1.png?1521759999161"></img>
         <h1>Showcasing our designer's work</h1>
         <button v-scroll-to="'.designers-section'">View our designers</button>
         <div class='welcome-img1' v-for="item in landingImageProjects">
@@ -21,9 +22,11 @@
         </div>
       </div>
     </div>
+
     <div class='about'>
       <h1>What we do</h1>
       <div class='about-details'>
+    <!-- Applying tansition group on about slider -->
         <transition-group name="fade">
           <div class='about-slider' v-for="number in [currentNumber]" v-bind:key="number">
             <img :src='images[Math.abs(currentNumber) % images.length]' />
@@ -62,7 +65,6 @@
           <div :class="{arrowdown:designer.name == selected}"></div>
         </div>
       </div>
-
     </div>
     <transition name="modal">
       <NathanChambers v-if='author2Stats' />
@@ -70,47 +72,8 @@
       <ElenaGalitsky v-if='author3Stats' />
       <DannyCarlsen v-if='author4Stats' />
     </transition>
-    <!-- <div class='footer'>
-
-                      <div class='behance-profile'>
-                        <div>
-                          <h3>Behance profile</h3>
-                        </div>
-                        <div class='behance-profile--links'>
-                          <a :href='designers[1].url' target='_blank'>
-                            <p>Sarel VanStaden</p>
-                          </a>
-                          <a :href='designers[3].url' target='_blank'>
-                            <p>Nathan Chambers</p>
-                          </a>
-                          <a :href='designers[0].url' target='_blank'>
-                            <p>Elena Galitsky</p>
-                          </a>
-                          <a :href='designers[2].url' target='_blank'>
-                            <p>Danny Carlsen</p>
-                          </a>
-                        </div>
-
-                      </div>
-                      <div class="address">
-                        <div>
-                          <h3>Contact</h3>
-                        </div>
-                        <div class="mail">
-                          <div>
-                            <i class="glyphicon glyphicon-folder-open"></i>
-                            <p>20,Wallstreet,Ohama</p>
-                          </div>
-                          <div>
-                            <i class="phone glyphicon glyphicon-phone-alt"></i>
-                            <p>0800-237-237</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
   </div>
   </div>
-  <!--API=IryTnzmJFPkXW4oKRd2kQSaYTanjKD7c-->
 </template>
 
 <script>
@@ -178,7 +141,6 @@ export default {
   methods: {
     addCoverimage: function(data) {
       this.sarelVanProjects = data
-      // console.log(this.image)
 
     },
     toggle: function(clicked) {
@@ -236,6 +198,7 @@ export default {
 
   },
   created() {
+    /*Time out for requesting API*/
     function withTimeout(msecs, promise) {
       const timeout = new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -477,14 +440,14 @@ nav {
 }
 
 .prevnext {
-  margin: -5em 0 4em 0;
+  margin: -10em 0 8em 0;
 }
 
 .about-slider img {
   width: 40vw;
   height: 30vw;
   display: inline-block;
-  /*border:0.1em solid green;*/
+  margin-top:-2.5em;
 }
 
 .about-detail {
@@ -498,12 +461,9 @@ nav {
 }
 
 .aboutdetailcontenth1 {
-  text-align: left;
-  line-height: 1.75em;
-  margin-top: -0.5em;
-  font-size: 2em;
-  font-weight: bold;
-  font-family: 'Bree Serif', serif;
+width:70%;
+height:70%;
+font-size:0.8em;
 }
 
 .fade-enter-active {
@@ -571,7 +531,7 @@ nav {
   width: 100%;
   height: auto;
   margin: 0 auto;
-  margin: 3em 0 7em 0;
+  margin: 3em 0 4em 0;
   cursor: pointer;
 }
 
@@ -629,80 +589,6 @@ nav {
   }
 }
 
-
-/* .footer {
-  width: 100%;
-  display: flex;
-  height: 12vh;
-  margin-top: 2em;
-  background-color: #000000;
-  color: white;
-}
-
-.footer a {
-  color: white;
-}
-
-.address {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  padding: 0em 0 0 15em;
-}
-
-.address h3 {
-  text-align: left;
-  padding-bottom: 0.5em;
-}
-
-.mail {
-  display: flex;
-  flex-direction: row;
-  width: 60%;
-  justify-content: space-between;
-  height: 3em;
-  font-size: 1.25em;
-  color: white;
-}
-
-.mail p {
-  display: inline;
-  color: white;
-  padding-left: 0.75em;
-  font-family: 'Exo';
-  font-size: 0.75em;
-}
-
-.behance-profile {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  height: auto;
-  text-align: left;
-  padding: 0em 0 0 15em;
-}
-
-.behance-profile a {
-  width: 50%;
-}
-
-.behance-profile h3 {
-  text-align: left;
-  padding-bottom: 0.5em;
-}
-
-.behance-profile--links {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  height: auto;
-}
-
-.behance-profile p {
-  font-size: 1em;
-} */
-
 @media screen and (max-width:1400px) {
 
   nav ul li {
@@ -732,7 +618,7 @@ nav {
     height: 280px;
   }
   .about {
-    height: 65%;
+    height: 70%;
   }
   .designers-section h1 {
     font-family: 'Bree Serif', serif;
@@ -757,7 +643,7 @@ nav {
     border-right: 20px solid transparent;
     border-top: 20px solid #42b983;
     bottom: -2.5em;
-    right: 7.5em;
+    right: 6.5em;
   }
 
 
@@ -774,6 +660,210 @@ nav {
 }
 
 @media screen and (max-width:1000px) {
+  nav ul li {
+    font-size: 1.25em;
+    margin-right: 3vw;
+  }
+  .logo-landingpage {
+    width: 6vw;
+    height: 5vw;
+    margin-bottom: -1em;
+  }
+  .welcome-page{
+    height:80%;
+  }
+  .welcome-page-details h1 {
+    font-size: 2.5em;
+  }
+  .welcome-page-details button {
+    font-size: 1.5em;
+    height: 16%;
+    padding: 10px;
+  }
+  .welcome-img1 {
+    width: 20%;
+    height: 20%;
+    top: 55vh;
+  }
+  .welcome-img1 img {
+    width: 50%;
+    height: 50%;
+  }
+   .about {
+    height: 70%;
+  }
+  .about h1 {
+  font-size: 2.75em;
+  margin-bottom: 2em;
+}
+  .about-slider img {
+  width: 40vw;
+  height: 40vw;
+}
+ .designers-section h1 {
+    font-size: 2.75em;
+    padding-bottom: 1em;
+  }
 
+  .designer {
+    width: 18vw;
+    height:20vh;
+  }
+
+.designers h3 {
+  font-size: 1em;
+  margin-top: -0.75em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
+  font-weight: bolder;
+}
+
+.designers p {
+  margin-top: -1.5em;
+  padding: 0.25em;
+  font-size: 0.75em;
+}
+ .highlight {
+    height:40%;
+  }
+   .arrowdown {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #42b983;
+    bottom: -2em;
+    right: 5.5em;
+  }
+
+  .glyphicon{
+    font-size: 0.7em;
+  }
+  .overall-stat{
+    margin-top: -1.2em;
+    padding:0.2em;
+  }
+    .overall-stat span {
+    padding: -1em 0 1em 0;
+  }
+
+  .overall-stat p {
+    margin-left: 0.25em;
+    font-size: 0.9em;
+    margin-top: -1em;
+  }
+}
+@media screen and (max-width:600px) {
+  nav ul li {
+    font-size: 1em;
+    margin-right: 3vw;
+  }
+   .logo-landingpage {
+    width: 8vw;
+    height: 5vw;
+    margin-bottom: -1em;
+  }
+  .welcome-page{
+    height:55%;
+  }
+  .welcome-page-details h1 {
+    font-size: 2em;
+  }
+  .welcome-page-details button {
+    font-size: 1.25em;
+    height: 16%;
+    padding: 10px;
+  }
+  .welcome-img1 {
+    width: 20%;
+    height: 20%;
+    top: 45vh;
+  }
+  .welcome-img1 img {
+    width: 50%;
+    height: 50%;
+  }
+    .about {
+    height: 70%;
+  }
+    .about-details {
+    flex-direction: column;
+  }
+  .about h1 {
+  font-size: 2.5em;
+  margin-bottom: 4em;
+}
+  .about-slider img {
+    margin-top:4em;
+  width: 80vw;
+  height: 60vw;
+}
+ .about-detail {
+
+   margin-top:16em;
+  width: 80vw;
+  height: 40vh;
+}
+.prevnext {
+  margin: -2em 0 8em 0;
+}
+.fade-enter-active {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+
+.slide-enter-active {
+  transition: all 0.6s ease;
+  overflow: hidden;
+}
+
+.slide-enter,
+.slide-leave {
+  transform: translate(0, 20%);
+  position: absolute;
+  z-index: 0;
+}
+
+.designers-section h1 {
+  font-size: 2em;
+  padding-bottom: 1em;
+  margin-top:-3em;
+}
+
+.designers {
+  width: 80%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  margin-left: 10%;
+}
+
+.designer {
+  background-color: rgba(255, 242, 207, 0.4);
+}
+
+.designers img {
+  width: 100%;
+  height: 80%;
+  margin: -.2em 1em 1em 0em;
+}
+
+.designers h3 {
+  width: 100%;
+  text-align: center;
+  margin-top: -0.5em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
+  font-weight: bolder;
+}
+
+.designers p {
+  width: 100%;
+  text-align: center;
+  margin-top: -1.5em;
+  padding: 0.5em;
+  font-family: 'Bree Serif', serif;
+  font-weight: normal;
+}
 }
 </style>
