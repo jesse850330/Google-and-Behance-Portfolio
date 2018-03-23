@@ -269,7 +269,6 @@ button {
   font-family: 'Merriweather', serif;
 }
 
-
 .projects button:hover {
   background: #000000;
   text-decoration: none;
