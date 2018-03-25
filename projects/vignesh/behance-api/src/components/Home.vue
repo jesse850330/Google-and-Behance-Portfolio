@@ -26,24 +26,31 @@
     <div class='about'>
       <h1>What we do</h1>
       <div class='about-details'>
-    <!-- Applying tansition group on about slider -->
+        <!-- Applying tansition group on about slider -->
         <transition-group name="fade">
           <div class='about-slider' v-for="number in [currentNumber]" v-bind:key="number">
             <img :src='images[Math.abs(currentNumber) % images.length]' />
           </div>
         </transition-group>
-        <transition-group name="slide">
-          <div class='about-detail' v-for="number in [currentNumber]" v-bind:key="number">
-            <div class='about-detail--content' :class='{aboutdetailcontenth1: position<1000}' v-html="contentAbout[Math.abs(currentNumber) % images.length]">
+        <div class='about-detail'>
+          <transition-group name="slide">
+            <div  v-for="number in [currentNumber]" v-bind:key="number">
+              <div class='about-detail--content' :class='{aboutdetailcontenth1: position<1000}' v-html="contentAbout[Math.abs(currentNumber) % images.length]">
+              </div>
             </div>
+          </transition-group>
+          <div class='prevnext'>
+            <p>
+              <a @click="prev" class="previous">&#8249;</a>
+              <a @click="next" class="next">&#8250;</a>
+            </p>
           </div>
-        </transition-group>
+        </div>
+
       </div>
+
     </div>
-    <p class='prevnext'>
-      <a @click="prev" class="previous">&#8249;</a>
-      <a @click="next" class="next">&#8250;</a>
-    </p>
+
     <div class='designers-section'>
       <h1 class='designers-heading'>Our designers</h1>
       <div class='designers'>
@@ -97,7 +104,7 @@ export default {
       landingimage: [],
       random: Number,
       names: [],
-      selected: 'Sarelvan Staden',
+      selected: 'NathanChambers',
       profilehover: false,
       image1: true,
       image2: false,
@@ -115,17 +122,17 @@ export default {
         `<h1 style='text-align:left;line-height:1.75em;margin-top:-0.5em;font-size:2em;font-weight:bold;  font-family: 'Bree Serif', serif'>Websites Design </h1>
         <p style='text-align:left;line-height:1.75em;letter-spacing:0.1em;font-size:1em;  font-family: Georgia, 'Times New Roman', Times, serif;font-weight:lighter;'>Top search engine rankings for hundreds of clients.We're dedicated to create optimized user experience & to enable fast website development and easy content maintenance.</p>
         <p style='text-align:left;line-height:1.75em;letter-spacing:0.1em;font-size:1em; margin-top:1.2em; font-family: Georgia, 'Times New Roman', Times, serif;font-weight:lighter;'>Ux design and content management system</p>
-        <button style='width: 60%;border-radius: 8;font-size: 1.5em;margin: 1em 0 1em 0;background-color: white;color: black;border: 2px solid #4CAF50;padding: 8px;font-family: 'Merriweather', serif;'>View Project</button>`,
+        <a href='https://bachoodesign.com/' target='_blank'><button style='width: 60%;border-radius: 8;font-size: 1.5em;margin: 1em 0 1em 0;background-color: white;color: black;border: 2px solid #4CAF50;padding: 8px;font-family: 'Merriweather', serif;'>View Project</button></a>`,
 
         `<h1 style='text-align:left;line-height:1.75em;margin-top:-0.5em;font-size:2em;font-weight:bold;  font-family: 'Bree Serif', serif'>Photography</h1>
-        <p style='text-align:left;line-height:1.75em;letter-spacing:0.1em;font-size:1em;  font-family: Georgia, 'Times New Roman', Times, serif;font-weight:lighter;'>Our employess has been winning awards for as many years. Like most photographers, our photographers do commercial photography and more specifically automotive photography.</p>
+        <p style='text-align:left;line-height:1.75em;letter-spacing:0.1em;font-size:1em;  font-family: Georgia, 'Times New Roman', Times, serif;font-weight:lighter;'>Our employess has been winning awards for as many years.</p>
         <p style='text-align:left;line-height:1.75em;letter-spacing:0.1em;font-size:1em;margin-top:1.2em;  font-family: Georgia, 'Times New Roman', Times, serif;font-weight:lighter;'> For commercial shoot. Skill for creative lighting techniques</p>
-        <button style='width: 60%;border-radius: 8;font-size: 1.5em;margin: 1em 0 1em 0;background-color: white;color: black;border: 2px solid #4CAF50;padding: 8px;font-family: 'Merriweather', serif;'>View Project</button>`,
+         <a href='http://www.carfineart.com/' target='_blank'><button style='width: 60%;border-radius: 8;font-size: 1.5em;margin: 1em 0 1em 0;background-color: white;color: black;border: 2px solid #4CAF50;padding: 8px;font-family: 'Merriweather', serif;'>View Project</button></a>`,
 
         `<h1 style='text-align:left;line-height:1.75em;margin-top:-0.5em;font-size:2em;font-weight:bold;  font-family: 'Bree Serif', serif'>Graphic design</h1>
         <p style='text-align:left;line-height:1.75em;letter-spacing:0.1em;font-size:1em;  font-family: Georgia, 'Times New Roman', Times, serif;font-weight:lighter;'>Nathan Chambers, one of our creative director of 485 Design. His work has won  and interior design. He has been featured in many books & magazines</p>
         <p style='text-align:left;line-height:1.75em;letter-spacing:0.1em;font-size:1em; margin-top:1.2em; font-family: Georgia, 'Times New Roman', Times, serif;font-weight:lighter;'>He has been featured in many books & magazines</p>
-        <button style='width: 60%;border-radius: 8;font-size: 1.5em;margin: 1em 0 1em 0;background-color: white;color: black;border: 2px solid #4CAF50;padding: 8px;font-family: 'Merriweather', serif;'>View Project</button>`
+        <a href='http://dannycarlsen.com/' target='_blank'><button style='width: 60%;border-radius: 8;font-size: 1.5em;margin: 1em 0 1em 0;background-color: white;color: black;border: 2px solid #4CAF50;padding: 8px;font-family: 'Merriweather', serif;'>View Project</button></a>`
       ]
     }
   },
@@ -186,14 +193,14 @@ export default {
     if (this.selected === 'DannyCarlsen') {
       this.author1Stats = false
       this.author2Stats = false
-      this.author3Stats = true
-      this.author4Stats = false
+      this.author3Stats = false
+      this.author4Stats = true
     }
     if (this.selected === 'ElenaGalitsky') {
       this.author1Stats = false
       this.author2Stats = false
-      this.author3Stats = false
-      this.author4Stats = true
+      this.author3Stats = true
+      this.author4Stats = false
     }
 
   },
@@ -412,9 +419,9 @@ nav {
 
 .about {
   width: 80%;
-  height: 80%;
+  height: 70%;
   margin: 0 auto;
-  margin-top: 4vh;
+  margin-top: 8vh;
   padding-bottom: 2.25em;
   display: flex;
   flex-direction: column;
@@ -440,14 +447,16 @@ nav {
 }
 
 .prevnext {
-  margin: -10em 0 8em 0;
+  display: flex;
+  margin: 12em 0 0 4em;
+  text-align: left;
 }
 
 .about-slider img {
-  width: 40vw;
-  height: 30vw;
+  width: 90%;
+  height:500px;
   display: inline-block;
-  margin-top:-2.5em;
+  margin-top: -2.5em;
 }
 
 .about-detail {
@@ -461,9 +470,9 @@ nav {
 }
 
 .aboutdetailcontenth1 {
-width:70%;
-height:70%;
-font-size:0.8em;
+  width: 70%;
+  height: 70%;
+  font-size: 0.8em;
 }
 
 .fade-enter-active {
@@ -531,14 +540,14 @@ font-size:0.8em;
   width: 100%;
   height: auto;
   margin: 0 auto;
-  margin: 3em 0 4em 0;
+  margin: -2em 0 4em 0;
   cursor: pointer;
 }
 
 .designers-section h1 {
   font-family: 'Bree Serif', serif;
   font-size: 3em;
-  padding-bottom: 3em;
+  padding-bottom: 1em;
 }
 
 .designers {
@@ -618,7 +627,7 @@ font-size:0.8em;
     height: 280px;
   }
   .about {
-    height: 70%;
+    height: 75%;
   }
   .designers-section h1 {
     font-family: 'Bree Serif', serif;
@@ -669,8 +678,8 @@ font-size:0.8em;
     height: 5vw;
     margin-bottom: -1em;
   }
-  .welcome-page{
-    height:80%;
+  .welcome-page {
+    height: 80%;
   }
   .welcome-page-details h1 {
     font-size: 2.5em;
@@ -689,44 +698,53 @@ font-size:0.8em;
     width: 50%;
     height: 50%;
   }
-   .about {
-    height: 70%;
+  .about {
+    height: 60%;
   }
   .about h1 {
-  font-size: 2.75em;
-  margin-bottom: 2em;
-}
+    font-size: 2.75em;
+    margin-bottom: 2em;
+  }
   .about-slider img {
-  width: 40vw;
-  height: 40vw;
+    width: 40vw;
+    height: 40vw;
+  }
+  .prevnext {
+  margin: 4em 0 0 4em;
+  text-align: left;
 }
- .designers-section h1 {
+.aboutdetailcontenth1 {
+  width: 90%;
+  height: 60%;
+  font-size: 0.8em;
+}
+  .designers-section h1 {
     font-size: 2.75em;
     padding-bottom: 1em;
   }
 
   .designer {
     width: 18vw;
-    height:20vh;
+    height: 20vh;
   }
 
-.designers h3 {
-  font-size: 1em;
-  margin-top: -0.75em;
-  padding: 0.5em;
-  font-family: 'Bree Serif', serif;
-  font-weight: bolder;
-}
-
-.designers p {
-  margin-top: -1.5em;
-  padding: 0.25em;
-  font-size: 0.75em;
-}
- .highlight {
-    height:40%;
+  .designers h3 {
+    font-size: 1em;
+    margin-top: -0.75em;
+    padding: 0.5em;
+    font-family: 'Bree Serif', serif;
+    font-weight: bolder;
   }
-   .arrowdown {
+
+  .designers p {
+    margin-top: -1.5em;
+    padding: 0.25em;
+    font-size: 0.75em;
+  }
+  .highlight {
+    height: 40%;
+  }
+  .arrowdown {
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     border-top: 15px solid #42b983;
@@ -734,14 +752,14 @@ font-size:0.8em;
     right: 5.5em;
   }
 
-  .glyphicon{
+  .glyphicon {
     font-size: 0.7em;
   }
-  .overall-stat{
+  .overall-stat {
     margin-top: -1.2em;
-    padding:0.2em;
+    padding: 0.2em;
   }
-    .overall-stat span {
+  .overall-stat span {
     padding: -1em 0 1em 0;
   }
 
@@ -751,18 +769,19 @@ font-size:0.8em;
     margin-top: -1em;
   }
 }
+
 @media screen and (max-width:600px) {
   nav ul li {
     font-size: 1em;
     margin-right: 3vw;
   }
-   .logo-landingpage {
+  .logo-landingpage {
     width: 8vw;
     height: 5vw;
     margin-bottom: -1em;
   }
-  .welcome-page{
-    height:55%;
+  .welcome-page {
+    height: 55%;
   }
   .welcome-page-details h1 {
     font-size: 2em;
@@ -781,89 +800,89 @@ font-size:0.8em;
     width: 50%;
     height: 50%;
   }
-    .about {
+  .about {
     height: 70%;
   }
-    .about-details {
+  .about-details {
     flex-direction: column;
   }
   .about h1 {
-  font-size: 2.5em;
-  margin-bottom: 4em;
-}
+    font-size: 2.5em;
+    margin-bottom: 4em;
+  }
   .about-slider img {
-    margin-top:4em;
-  width: 80vw;
-  height: 60vw;
-}
- .about-detail {
+    margin-top: 4em;
+    width: 80vw;
+    height: 60vw;
+  }
+  .about-detail {
 
-   margin-top:16em;
-  width: 80vw;
-  height: 40vh;
-}
-.prevnext {
-  margin: -2em 0 8em 0;
-}
-.fade-enter-active {
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
+    margin-top: 16em;
+    width: 80vw;
+    height: 40vh;
+  }
+  .prevnext {
+    margin: -2em 0 8em 0;
+  }
+  .fade-enter-active {
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
 
 
-.slide-enter-active {
-  transition: all 0.6s ease;
-  overflow: hidden;
-}
+  .slide-enter-active {
+    transition: all 0.6s ease;
+    overflow: hidden;
+  }
 
-.slide-enter,
-.slide-leave {
-  transform: translate(0, 20%);
-  position: absolute;
-  z-index: 0;
-}
+  .slide-enter,
+  .slide-leave {
+    transform: translate(0, 20%);
+    position: absolute;
+    z-index: 0;
+  }
 
-.designers-section h1 {
-  font-size: 2em;
-  padding-bottom: 1em;
-  margin-top:-3em;
-}
+  .designers-section h1 {
+    font-size: 2em;
+    padding-bottom: 1em;
+    margin-top: -3em;
+  }
 
-.designers {
-  width: 80%;
-  height: auto;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap:wrap;
-  margin-left: 10%;
-}
+  .designers {
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 10%;
+  }
 
-.designer {
-  background-color: rgba(255, 242, 207, 0.4);
-}
+  .designer {
+    background-color: rgba(255, 242, 207, 0.4);
+  }
 
-.designers img {
-  width: 100%;
-  height: 80%;
-  margin: -.2em 1em 1em 0em;
-}
+  .designers img {
+    width: 100%;
+    height: 80%;
+    margin: -.2em 1em 1em 0em;
+  }
 
-.designers h3 {
-  width: 100%;
-  text-align: center;
-  margin-top: -0.5em;
-  padding: 0.5em;
-  font-family: 'Bree Serif', serif;
-  font-weight: bolder;
-}
+  .designers h3 {
+    width: 100%;
+    text-align: center;
+    margin-top: -0.5em;
+    padding: 0.5em;
+    font-family: 'Bree Serif', serif;
+    font-weight: bolder;
+  }
 
-.designers p {
-  width: 100%;
-  text-align: center;
-  margin-top: -1.5em;
-  padding: 0.5em;
-  font-family: 'Bree Serif', serif;
-  font-weight: normal;
-}
+  .designers p {
+    width: 100%;
+    text-align: center;
+    margin-top: -1.5em;
+    padding: 0.5em;
+    font-family: 'Bree Serif', serif;
+    font-weight: normal;
+  }
 }
 </style>

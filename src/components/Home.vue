@@ -171,7 +171,7 @@ nav {
   width: 60vw;
   height: auto;
   position: absolute;
-  top: 32vh;
+  top: 40vh;
   right: 20vw;
   color: #D6932E;
 }
@@ -222,5 +222,20 @@ li {
 
 a {
   color: #42b983;
+}
+@media screen and (max-width:1400px) {
+  .welcome-msg h1 {
+  font-size: 2.25em;
+}
+}
+@media screen and (max-width:1000px) {
+  .welcome-msg h1 {
+  font-size: 2em;
+}
+}
+@media screen and (max-width:700px) {
+  .welcome-msg h1 {
+  font-size: 1.75em;
+}
 }
 </style>

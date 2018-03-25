@@ -55,6 +55,9 @@
     <div>
       <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
     </div>
+     <div v-if='modal' v-on:click='closeModal()' class="modal-overlay closed" id="modal-overlay">
+      <i class="material-icons modal-overlay__close">close</i>
+    </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
     <div v-if='modal' v-on:click='closeModal()' class='overlay'>
     </div>
@@ -213,7 +216,15 @@ button {
   justify-content: space-between;
   padding: 1em;
 }
-
+#modal-overlay {
+  width: 3%;
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  z-index: 1;
+  color:white;
+  cursor: pointer;
+}
 .contri h1 {
   width: 35%;
   font-size: 2em;
@@ -239,7 +250,6 @@ button {
   height: 60%;
   float: left;
   margin-left: 6%;
-  border: 0.1em solid green;
   margin-bottom: 3em;
   box-shadow: 0.1px 0.1px 2px 0px rgba(0, 0, 0, 0.45);
 }
@@ -253,9 +263,9 @@ button {
 }
 
 .projects img {
-  width: 100.1%;
+  width: 100%;
   height: 60%;
-  margin-top: -0.2em;
+  margin:0 auto;
 }
 
 .projects button {
@@ -377,7 +387,7 @@ button {
   height: 60%;
   float: left;
   margin-left: 6%;
-  border: 0.1em solid green;
+  box-shadow: 0.1px 0.1px 2px 0px rgba(0, 0, 0, 0.45);
   margin-bottom: 3em;
 }
 
