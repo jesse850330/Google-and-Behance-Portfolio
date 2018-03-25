@@ -12,14 +12,14 @@
     <nav v-bind:class="{ active : (scrollPosition >= 700)}">
       <img v-scroll-to="'.home'" class='logo-landingpage' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2FW%20JOV%20logo.png?1520054601329"></img>
       <ul>
-        <li v-bind:class="{ jactive : (scrollPosition >= position*2 && scrollPosition <= position * 3) && jactivenav}" class='jesse' v-scroll-to="'.j'">Jesse</li>
-        <li v-bind:class="{ oactive : (scrollPosition >= position * 3.1 && scrollPosition <= position *4.2) && oactivenav}" class='oliver' v-scroll-to="'.o'">Oliver</li>
-        <li v-bind:class="{ vactive : (scrollPosition >= position *4.2) && vactivenav}" class='vignesh' v-scroll-to="'.v'">Vignesh</li>
+        <li v-bind:class="{ jactive : (scrollPosition >= position*0.9 && scrollPosition <= position * 1.8) && jactivenav}" class='jessenav' v-scroll-to="'.jesse'">Jesse</li>
+        <li v-bind:class="{ oactive : (scrollPosition >= position * 1.8 && scrollPosition <= position *2.6) && oactivenav}" class='olivernav' v-scroll-to="'.oliver'">Oliver</li>
+        <li v-bind:class="{ vactive : (scrollPosition >= position *2.6) && vactivenav}" class='vigneshnav' v-scroll-to="'.vignesh'">Vignesh</li>
       </ul>
     </nav>
     <div>
-      <parallax :fixed='true'>
-      <img class='para' src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fsaturn-with-rings-in-space-zoom-into-beautiful-planet-on-black-background-with-stars-and-sun-in-distance_ekv0blbxe__F0000.png?1519896515509"></img>
+      <parallax class='para' :fixed='true'>
+      <img  src="https://cdn.glitch.com/6030f993-85bf-48c3-ba08-201d282bac21%2Fsaturn-with-rings-in-space-zoom-into-beautiful-planet-on-black-background-with-stars-and-sun-in-distance_ekv0blbxe__F0000.png?1519896515509"></img>
     </parallax>
     </div>
     <J></J>
@@ -51,8 +51,15 @@ export default {
     scrollHigh: function() {
       this.scrollPosition = window.scrollY
       this.position = window.innerHeight
-      console.log(this.position)
+    
     }
+  },
+  updated(){
+if(this.scrollPosition >= 10){
+  this.vactivenav = true
+  this.jactivenav = true
+  this.oactivenav = true
+}
   },
   mounted() {
     window.addEventListener('scroll', this.scrollHigh)
@@ -60,9 +67,9 @@ export default {
   data() {
     return {
       scrollPosition: null,
-      jactivenav: true,
-      oactivenav: true,
-      vactivenav: true,
+      jactivenav: false,
+      oactivenav:false,
+      vactivenav: false,
       position: null
     }
   }
@@ -82,9 +89,11 @@ h1,
 h2 {
   font-weight: normal;
 }
+.navcolor{
+  color:white;
+}
 .para{
   width:100%;
-  height:300%;
   position: absolute;
   left: 0;
   z-index: -999;
@@ -94,28 +103,27 @@ h2 {
 }
 
 .jactive {
-  color: #00D9FF;
+  color: #E89605;
 }
 
 .oactive {
-  color: #000000;
+  color: #E89605;
 }
 
 .vactive {
-  color: rgba(213, 166, 217, 0.5);
+  color: #E89605;
 }
 
-.jesse {
+.jessenav {
   border-right: 0.1em solid #D6932E;
   padding-right: 1.5em;
 }
 
-.oliver {
+.olivernav {
   border-right: 0.1em solid #D6932E;
   padding-right: 1.6em;
 }
 
-.vignesh {}
 
 nav ul li {
   display: flex;
@@ -125,7 +133,7 @@ nav ul li {
   margin-bottom: 2vh;
   font-size: 1.75em;
   color: white;
-  line-height: 50px;
+  line-height: 85px;
   display: inline;
   margin-right: 3vw;
   font-family: 'Bree Serif', serif;
@@ -149,9 +157,9 @@ nav {
 
 .logo-landingpage {
   width: auto;
-  height: 90px;
+  height: 80px;
   position: absolute;
-  /* top: 2em; */
+   top: 0.8em; 
   left: 2em;
 }
 
@@ -163,7 +171,7 @@ nav {
   width: 60vw;
   height: auto;
   position: absolute;
-  top: 32vh;
+  top: 40vh;
   right: 20vw;
   color: #D6932E;
 }
@@ -214,5 +222,20 @@ li {
 
 a {
   color: #42b983;
+}
+@media screen and (max-width:1400px) {
+  .welcome-msg h1 {
+  font-size: 2.25em;
+}
+}
+@media screen and (max-width:1000px) {
+  .welcome-msg h1 {
+  font-size: 2em;
+}
+}
+@media screen and (max-width:700px) {
+  .welcome-msg h1 {
+  font-size: 1.75em;
+}
 }
 </style>

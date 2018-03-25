@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-        <router-link v-bind:to="'/'">Home</router-link>
+        <router-link class='router-link' v-bind:to="'/'">&#8592; Back to portfolio</router-link>
     <router-view></router-view>
   </div>
 </template>
@@ -25,7 +25,11 @@ export default {
  :before {
   box-sizing: border-box;
 }
-
+.router-link{
+position: absolute;
+left:2em;
+top:1em;
+}
 .img-landingpage {
   width: 100vw;
   height: 100vh
@@ -39,7 +43,9 @@ html,
 body {
   height: 100vh;
 }
-
+a{
+  text-decoration: none;
+}
 body {
   margin: 0;
   min-height: 100%;
