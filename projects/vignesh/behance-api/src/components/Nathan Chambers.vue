@@ -38,12 +38,18 @@
             <img v-bind:src='author2Project.covers[404]'></img>
             <h4>{{author2Project.name}}</h4>
             <div class='over-stat'>
-                <span class="glyphicon glyphicon-eye-open"><p>{{author2Project.stats.views}}</p></span>
-                
-                <span class="glyphicon glyphicon-user"><p>{{author2Project.stats.appreciations}}</p></span>
-                
-                <span class="	glyphicon glyphicon-thumbs-up">  <p>{{author2Project.stats.comments}}</p></span>
-               
+              <span class="glyphicon glyphicon-eye-open">
+                <p>{{author2Project.stats.views}}</p>
+              </span>
+
+              <span class="glyphicon glyphicon-user">
+                <p>{{author2Project.stats.appreciations}}</p>
+              </span>
+
+              <span class="	glyphicon glyphicon-thumbs-up">
+                <p>{{author2Project.stats.comments}}</p>
+              </span>
+
             </div>
             <a :href='author2Project.url' target='_blank'>
               <button>View Project</button>
@@ -54,6 +60,9 @@
     </transition>
     <div>
       <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
+    </div>
+    <div v-if='modal' v-on:click='closeModal()' class="modal-overlay closed" id="modal-overlay">
+      <i class="material-icons modal-overlay__close">close</i>
     </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
     <div v-if='modal' v-on:click='closeModal()' class='overlay'>
@@ -115,11 +124,11 @@ export default {
         series: [
           {
             name: 'Views',
-            data: [9822, 2077,6289, 3033, 4773 ,9678]
+            data: [9822, 2077, 6289, 3033, 4773, 9678]
           },
           {
             name: 'Likes',
-            data: [47, 86,31, 77, 175, 44]
+            data: [47, 86, 31, 77, 175, 44]
           }
         ]
       }
@@ -325,7 +334,15 @@ button {
   transition: all .8s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
-
+#modal-overlay {
+  width: 3%;
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  z-index: 1;
+  color:white;
+  cursor: pointer;
+}
 .overlay {
   width: 100%;
   height: 100%;
@@ -423,15 +440,15 @@ button {
 }
 
 
-.over-stat span{
-width:20%;
-
+.over-stat span {
+  width: 20%;
 }
-.over-stat p{
-display: inline;
-margin-left:-0.6em;
 
+.over-stat p {
+  display: inline;
+  margin-left: -0.6em;
 }
+
 .all projects .over-stat p {
   display: inline;
   margin-left: 0.5em;
@@ -493,18 +510,17 @@ margin-left:-0.6em;
     font-size: 1.25em;
   }
 
-  .over-stat span{
-width:25%;
+  .over-stat span {
+    width: 25%;
+  }
+  .over-stat p {
+    display: inline;
+    margin-left: -1.6em;
+  }
+}
 
-}
-.over-stat p{
-display: inline;
-margin-left:-1.6em;
-
-}
-}
 @media screen and (max-width:1000px) {
- .contri h1 {
+  .contri h1 {
     width: 37%;
     font-size: 1.75em;
   }
@@ -513,29 +529,29 @@ margin-left:-1.6em;
     width: 47%;
     font-size: 1.25em;
   }
-.project {
-  width: 28%;
-  margin-left: 4%;
-}
-.projects h4 {
-  margin-top: 0.75em;
-  font-size:1em;
-}
+  .project {
+    width: 28%;
+    margin-left: 4%;
+  }
+  .projects h4 {
+    margin-top: 0.75em;
+    font-size: 1em;
+  }
 
-.projects button {
-  font-size: 1.25em;
-  padding: 6px;
-}
+  .projects button {
+    font-size: 1.25em;
+    padding: 6px;
+  }
 
 
-.glyphicon{
-  font-size: 0.8em;
-}
-.all-projects-button {
-  width: 17vw;
-  height: 4.5vh;
-  font-size: 1em;
-}
+  .glyphicon {
+    font-size: 0.8em;
+  }
+  .all-projects-button {
+    width: 17vw;
+    height: 4.5vh;
+    font-size: 1em;
+  }
 
   .project-modal h1 {
     margin: 1em 1em 1em 4em;
@@ -544,23 +560,21 @@ margin-left:-1.6em;
   .all-project h4 {
     font-size: 1em;
   }
-.project-filter--buttons {
-  right: 7em;
-}
-.over-stat{
-  margin-left:-1em;
-}
-  .over-stat span{
-width:25%;
-
-}
-.over-stat p{
-margin-left:-1.6em;
-
-}
-.all-project button {
-  width: 60%;
-  font-size: 1em;
-}
+  .project-filter--buttons {
+    right: 7em;
+  }
+  .over-stat {
+    margin-left: -1em;
+  }
+  .over-stat span {
+    width: 25%;
+  }
+  .over-stat p {
+    margin-left: -1.6em;
+  }
+  .all-project button {
+    width: 60%;
+    font-size: 1em;
+  }
 }
 </style>

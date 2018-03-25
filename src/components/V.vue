@@ -115,11 +115,7 @@ a {
   padding-right: 6vw;
 }
 
-.project-title img {
-  width: 10vw;
-  height: 10vh;
-  margin-top: -2vh;
-}
+
 
 .name h1 {
   height: auto;
@@ -153,5 +149,139 @@ li {
 
 a {
   color: #42b983;
+}
+@media screen and (max-width:1400px) {
+
+.project-details p {
+  width: 50vw;
+  font-family: 'Georgia', serif;
+  text-align: left;
+  font-size: 1.25em;
+  line-height: 1.8;
+  letter-spacing: 0.11em;
+  margin-top:2.5em;
+}
+
+.project-details h1 {
+  width: 50vw;
+  height: 1em;
+  text-align: left;
+  font-size: 2em;
+  margin-top: 5vh;
+}
+
+.project-details img {
+  width: 450px;
+  height: auto;
+  margin: 30.5vh 4vw 0 0;
+  padding-right: 6vw;
+}
+
+
+.project-title h1 {
+  margin-top: 2vh;
+  font-size: 2.75em;
+  text-align: center;
+}
+.name h1 {
+  height: auto;
+  margin-top: 1.5vh;
+  text-align: left;
+  font-size: 2.5em;
+}
+
+.vigneshHome {
+  height: auto;
+  width: auto;
+  font-size: 1.75em;
+  margin-top: 1.5em;
+}
+}
+@media screen and (max-width:1000px) {
+
+.project-details p {
+  width: 60vw;
+  font-size: 1.2em;
+  letter-spacing: 0.11em;
+  margin-top:2.5em;
+}
+
+.project-details h1 {
+  width: 50vw;
+  height: 1em;
+  text-align: left;
+  font-size: 1.75em;
+  margin-top: 5vh;
+}
+
+.project-details img {
+  width: 300px;
+  height: auto;
+  margin: 30.5vh 1vw 0 0;
+  padding-right: 6vw;
+}
+
+
+.project-title h1 {
+  margin-top: 2vh;
+  font-size: 2.5em;
+  text-align: center;
+}
+.name h1 {
+  height: auto;
+  margin-top: 1.5vh;
+  text-align: left;
+  font-size: 2.25em;
+}
+
+.vigneshHome {
+  height: auto;
+  width: auto;
+  font-size: 1.5em;
+  margin-top: 1.5em;
+}
+}
+@media screen and (max-width:700px) {
+.project-details {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+}
+.project-details p {
+  width: 80vw;
+  font-size: 1.2em;
+  letter-spacing: 0.11em;
+  margin-top:2.5em;
+}
+
+.project-details h1 {
+  width: 50vw;
+  height: 1em;
+  font-size: 1.75em;
+  margin-top: 5vh;
+}
+
+.project-details img {
+  width: 200px;
+  height: auto;
+  margin: 1.5vh 1vw 0 0;
+}
+
+
+.project-title h1 {
+  width:100%;
+  margin-top: 2vh;
+  font-size: 2.5em;
+}
+.name h1 {
+  width: 80vw;
+  height: auto;
+  margin-top: 1.5vh;
+  text-align: center;
+  font-size: 2.25em;
+}
+
+
 }
 </style>

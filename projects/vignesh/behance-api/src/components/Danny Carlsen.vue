@@ -55,6 +55,9 @@
     <div>
       <button class='all-projects-button' v-on:click='showModal()'>VIEW ALL PROJECTS</button>
     </div>
+     <div v-if='modal' v-on:click='closeModal()' class="modal-overlay closed" id="modal-overlay">
+      <i class="material-icons modal-overlay__close">close</i>
+    </div>
     <VueHighcharts class='vuechart' :options="options" ref="lineCharts"></VueHighcharts>
     <div v-if='modal' v-on:click='closeModal()' class='overlay'>
     </div>
@@ -269,7 +272,15 @@ button {
   font-family: 'Merriweather', serif;
 }
 
-
+#modal-overlay {
+  width: 3%;
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  z-index: 1;
+  color:white;
+  cursor: pointer;
+}
 .projects button:hover {
   background: #000000;
   text-decoration: none;
